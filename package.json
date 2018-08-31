@@ -1,0 +1,23 @@
+{
+  "name": "grupo-e-frontend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node startServer",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Grupo-E-022018-DAPP-sgonzalez-lvaquel/Grupo-E-frontend.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Grupo-E-022018-DAPP-sgonzalez-lvaquel/Grupo-E-frontend/issues"
+  },
+  "homepage": "https://github.com/Grupo-E-022018-DAPP-sgonzalez-lvaquel/Grupo-E-frontend#readme",
+  "devDependencies": {
+    "jest": "^23.5.0"
+  }
+}
