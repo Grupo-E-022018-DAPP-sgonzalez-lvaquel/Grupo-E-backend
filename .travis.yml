@@ -2,8 +2,7 @@
   "os": "linux",
   "dist": "trusty",
   "group": "stable",
-  "script": [
-  ],
+  "script": [],
   "install": [
     "(npm install)"
   ],
