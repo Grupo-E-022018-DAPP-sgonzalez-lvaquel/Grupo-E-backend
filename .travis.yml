@@ -1,0 +1,5 @@
+lenguage: node_js
+npm: 
+    - 9.0
+jest:
+    - ^23.5.0
