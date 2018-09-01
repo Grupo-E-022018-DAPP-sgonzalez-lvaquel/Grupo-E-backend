@@ -1,5 +1,13 @@
-lenguage: node_js
-npm: 
-    - 9.0
-jest:
-    - ^23.5.0
+{
+  "os": "linux",
+  "npm": [
+    9
+  ],
+  "dist": "trusty",
+  "jest": [
+    "^23.5.0"
+  ],
+  "group": "stable",
+  "language": "node_js",
+  "lenguage": "node_js"
+}
