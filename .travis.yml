@@ -1,16 +1,20 @@
 {
   "os": "linux",
-  "node": [
-    9.8.0
-  ]
-  "npm": [
-    5.6.0
-  ],
   "dist": "trusty",
-  "jest": [
-    "^23.5.0"
-  ],
   "group": "stable",
-  "language": "javascript",
-  "lenguage": "node_js"
+  "script": [
+    "(npm test)",
+    "(node start)"
+  ],
+  "install": [
+    "(npm install)"
+  ],
+  "node_js": "node",
+  "language": "node_js",
+  "before_install": [
+    "npm i -g npm@5.6.0",
+    "npm install -g typescript",
+    "npm install -g ts-node",
+    "npm install -g jest@^23.5.0",
+  ]
 }
