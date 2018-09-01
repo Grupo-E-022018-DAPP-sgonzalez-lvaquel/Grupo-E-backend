@@ -3,13 +3,11 @@
   "dist": "trusty",
   "group": "stable",
   "script": [
-    "(npm test)",
-    "(node start)"
   ],
   "install": [
     "(npm install)"
   ],
-  "node_js": "node",
+  "node_js": "node@9.8.0",
   "language": "node_js",
   "before_install": [
     "npm install -g jest@^23.5.0",
