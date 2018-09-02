@@ -6,11 +6,17 @@ import {
 
 describe('Auction', () => {
     describe('who can bet', () => {
+      let anyUser;
+      let anyOtherUser;
+      let anonymousUser;
+      
+      beforeEach(() => {
+          anyUser = new UserBuilder().build();
+          anyOtherUser = new UserBuilder().build();
+          anonymousUser = new UserBuilder().anonymous().build();
+      });
+
         describe('in a new auction', () => {
-            let anyUser;
-            beforeEach(() => {
-                anyUser = new UserBuilder().build();
-            });
             test('the owner can not bet', () => {
                 // Setup
                 const auction = new AuctionBuilder().withOwner(anyUser).build();
@@ -34,7 +40,6 @@ describe('Auction', () => {
             });
             test('anonymous user can not bet', () => {
                 // Setup
-                const anonymousUser = new UserBuilder().anonymous().build();
                 const auction = new AuctionBuilder().build();
 
                 // Exercise
