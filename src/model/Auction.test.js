@@ -1,3 +1,9 @@
+import {
+    AuctionBuilder,
+    UserBuilder
+} from './Builders';
+
+
 describe('Auction', () => {
     describe('who can bet', () => {
         describe('in a new auction', () => {
@@ -15,7 +21,7 @@ describe('Auction', () => {
                 // Verify
                 expect(actual).toBeFalsy();
             });
-            test('registered user can not bet', () =>{
+            test('registered user can not bet', () => {
                 // Setup
                 const anyOtherUser = new UserBuilder().build();
                 const auction = new AuctionBuilder().withOwner(anyUser).build();
