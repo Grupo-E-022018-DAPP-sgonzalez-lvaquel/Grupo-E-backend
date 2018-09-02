@@ -16,7 +16,7 @@ describe('Auction', () => {
                 const auction = new AuctionBuilder().withOwner(anyUser).build();
 
                 // Exercise
-                const actual = auction.canUserBet(user);
+                const actual = auction.canUserBet(anyUser);
 
                 // Verify
                 expect(actual).toBeFalsy();
