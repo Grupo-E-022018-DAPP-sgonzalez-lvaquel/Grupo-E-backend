@@ -45,17 +45,13 @@ describe('Auction', () => {
             });
         });
         describe('in an in progress auction', () => {
-            test('the owner can not bet', () => {
-              expect(true);
+            xtest('the owner can not bet', () => {
             });
-            test('last bettor can not bet', () => {
-              expect(true);
+            xtest('last bettor can not bet', () => {
             });
-            test('registered user can bet if he is not the last bettor', () => {
-              expect(true);
+            xtest('registered user can bet if he is not the last bettor', () => {
             });
-            test('anonymous user can not bet', () => {
-              expect(true);
+            xtest('anonymous user can not bet', () => {
             });
         });
         describe('in a finished auction', () => {
