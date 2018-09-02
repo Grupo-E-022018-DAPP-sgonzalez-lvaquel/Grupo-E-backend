@@ -2,7 +2,8 @@
 
 ## Contenidos
 
-- [Desarrollo](#Desarrollo)
+- [Desarrollo](#Desarrollo)  
+- [Interacción Continua](#CI)
 
 ## Desarrollo
 
@@ -21,4 +22,8 @@
 - Ejecutar tests
   ``` bash
   npm test
-  ```
+  ```  
+    
+## CI  
+  
+- Travis [link](https://travis-ci.com/Grupo-E-022018-DAPP-sgonzalez-lvaquel)
