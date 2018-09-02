@@ -45,14 +45,57 @@ describe('Auction', () => {
             });
         });
         describe('in an in progress auction', () => {
-            xtest('the owner can not bet', () => {
-            });
-            xtest('last bettor can not bet', () => {
-            });
-            xtest('registered user can bet if he is not the last bettor', () => {
-            });
-            xtest('anonymous user can not bet', () => {
-            });
+          test('the owner can not bet', () => {
+            // Setup
+            const auction = new AuctionBuilder()
+              .inProgress()
+              .withOwner(anyUser)
+              .build();
+    
+            // Exercise
+            const actual = auction.canUserBet(anyUser);
+    
+            // Verify
+            expect(actual).toBeFalsy();
+          });
+          test('last bettor can not bet', () => {
+            // Setup
+            const auction = new AuctionBuilder()
+              .inProgress()
+              .withLastBettor(anyUser)
+              .build();
+    
+            // Exercise
+            const actual = auction.canUserBet(anyUser);
+    
+            // Verify
+            expect(actual).toBeFalsy();
+          });
+          test('registered user can bet if he is not the last bettor', () => {
+            // Setup
+            const auction = new AuctionBuilder()
+              .inProgress()
+              .withLastBettor(anyOtherUser)
+              .build();
+    
+            // Exercise
+            const actual = auction.canUserBet(anyUser);
+    
+            // Verify
+            expect(actual).toBeTruthy();
+          });
+          test('anonymous user can not bet', () => {
+            // Setup
+            const auction = new AuctionBuilder()
+              .inProgress()
+              .build();
+    
+            // Exercise
+            const actual = auction.canUserBet(anonymousUser);
+    
+            // Verify
+            expect(actual).toBeFalsy();
+          });
         });
         describe('in a finished auction', () => {
             test('the owner can not bet', () => {
