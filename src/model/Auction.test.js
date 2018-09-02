@@ -1,14 +1,41 @@
 describe('Auction', () => {
     describe('who can bet', () => {
         describe('in a new auction', () => {
-            test('the owner can not bet', () => {
-              expect(true);
+            let anyUser;
+            beforeEach(() => {
+                anyUser = new UserBuilder().build();
             });
-            test('registered user can not bet', () => {
-              expect(true);
+            test('the owner can not bet', () => {
+                // Setup
+                const auction = new AuctionBuilder().withOwner(anyUser).build();
+
+                // Exercise
+                const actual = auction.canUserBet(user);
+
+                // Verify
+                expect(actual).toBeFalsy();
+            });
+            test('registered user can not bet', () =>{
+                // Setup
+                const anyOtherUser = new UserBuilder().build();
+                const auction = new AuctionBuilder().withOwner(anyUser).build();
+
+                // Exercise
+                const actual = auction.canUserBet(anyOtherUser);
+
+                // Verify
+                expect(actual).toBeFalsy();
             });
             test('anonymous user can not bet', () => {
-              expect(true);
+                // Setup
+                const anonymousUser = new UserBuilder().anonymous().build();
+                const auction = new AuctionBuilder().build();
+
+                // Exercise
+                const actual = auction.canUserBet(anonymousUser);
+
+                // Verify
+                expect(actual).toBeFalsy();
             });
         });
         describe('in an in progress auction', () => {
