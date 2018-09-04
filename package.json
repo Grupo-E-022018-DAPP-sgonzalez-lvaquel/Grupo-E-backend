@@ -5,10 +5,11 @@
   "main": "index.js",
   "scripts": {
     "start": "node startServer",
+    "lint": "eslint --fix ./src",
     "test": "jest"
   },
-  "husky":{
-    "hooks":{
+  "husky": {
+    "hooks": {
       "pre-commit": "lint-staged",
       "pre-push": "npm test"
     }
