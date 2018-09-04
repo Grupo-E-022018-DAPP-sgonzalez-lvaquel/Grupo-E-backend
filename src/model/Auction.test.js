@@ -71,10 +71,7 @@ describe('Auction', () => {
               .build();
     
             // Exercise
-            const actual = auction.canUserBet(anyUser);
-    
-            // Verify
-            expect(actual).toBeFalsy();
+            expect(auction.canUserBet(anyUser)).toBeFalsy();
           });
           test('registered user can bet if he is not the last bettor', () => {
             // Setup
@@ -84,10 +81,7 @@ describe('Auction', () => {
               .build();
     
             // Exercise
-            const actual = auction.canUserBet(anyUser);
-    
-            // Verify
-            expect(actual).toBeTruthy();
+            expect(auction.canUserBet(anyUser)).toBeTruthy();
           });
           test('anonymous user can not bet', () => {
             // Setup
@@ -96,10 +90,7 @@ describe('Auction', () => {
               .build();
     
             // Exercise
-            const actual = auction.canUserBet(anonymousUser);
-    
-            // Verify
-            expect(actual).toBeFalsy();
+            expect(auction.canUserBet(anonymousUser)).toBeFalsy();
           });
         });
         describe('in a finished auction', () => {
