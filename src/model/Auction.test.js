@@ -94,14 +94,14 @@ describe('Auction', () => {
           });
         });
         describe('in a finished auction', () => {
-            test('the owner can not bet', () => {
-              expect(true);
+            xtest('the owner can not bet', () => {
+              
             });
-            test('registered users can not bet', () => {
-              expect(true);
+            xtest('registered users can not bet', () => {
+              
             });
-            test('anonymous users can not bet', () => {
-              expect(true);
+            xtest('anonymous users can not bet', () => {
+              
             });
         });
     });
