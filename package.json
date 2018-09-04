@@ -32,7 +32,7 @@
   "homepage": "https://github.com/Grupo-E-022018-DAPP-sgonzalez-lvaquel/Grupo-E-frontend#readme",
   "jest": {
     "transform": {
-      "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
+      "^.+\\.jsx?$": "babel-jest"
     }
   },
   "devDependencies": {
