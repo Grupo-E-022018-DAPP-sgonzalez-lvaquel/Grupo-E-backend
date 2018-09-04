@@ -94,14 +94,33 @@ describe('Auction', () => {
           });
         });
         describe('in a finished auction', () => {
-            xtest('the owner can not bet', () => {
-              
+            test('the owner can not bet', () => {
+              // Setup
+              const auction = new AuctionBuilder()
+                .withOwner(anyUser)
+                .ended()
+                .build();
+
+              // Exercise
+              expect(auction.canUserBet(anyUser)).toBeFalsy();
             });
-            xtest('registered users can not bet', () => {
+            test('registered users can not bet', () => {
+              // Setup
+              const auction = new AuctionBuilder()
+                .ended()
+                .build();
               
+              // Exercise
+              expect(auction.canUserBet(anyUser)).toBeFalsy();
             });
-            xtest('anonymous users can not bet', () => {
-              
+            test('anonymous users can not bet', () => {
+              // Setup
+              const auction = new AuctionBuilder()
+                .ended()
+                .build();
+                
+              // Exercise
+              expect(auction.canUserBet(anonymousUser)).toBeFalsy();
             });
         });
     });
