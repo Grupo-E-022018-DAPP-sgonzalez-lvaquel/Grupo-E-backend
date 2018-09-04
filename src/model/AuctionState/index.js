@@ -1,12 +1,12 @@
 export {
     AuctionStateNew
 }
-from './AuctionStateNew';
+    from './AuctionStateNew';
 export {
     AuctionStateInProgress
 }
-from './AuctionStateInProgress';
+    from './AuctionStateInProgress';
 export {
     AuctionStateEnded
 }
-from './AuctionStateEnded';
+    from './AuctionStateEnded';

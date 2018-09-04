@@ -1,9 +1,9 @@
-import { AuctionState } from "./AuctionState";
+import { AuctionState } from './AuctionState';
 
 
 export class AuctionStateInProgress extends AuctionState {
     isInProgress(){
-        return true
+        return true;
     }
 }
 

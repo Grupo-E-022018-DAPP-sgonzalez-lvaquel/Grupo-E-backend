@@ -2,7 +2,7 @@ import {
     AuctionStateNew, 
     AuctionStateInProgress, 
     AuctionStateEnded 
-} from "../AuctionState";
+} from '../AuctionState';
 
 
 export class AuctionStateBuilder{

@@ -1,4 +1,4 @@
-import Auction from "../Auction";
+import Auction from '../Auction';
 
 export class AuctionBuilder {
 
@@ -11,7 +11,7 @@ export class AuctionBuilder {
     }   
 
     withOwner(owner) {
-        this.auction.owner = owner
+        this.auction.owner = owner;
         return this;
     }
 
@@ -21,7 +21,7 @@ export class AuctionBuilder {
     }
 
     withLastBettor(bettor){
-        this.auction.lastBettor = bettor
+        this.auction.lastBettor = bettor;
         return this;
     }
 

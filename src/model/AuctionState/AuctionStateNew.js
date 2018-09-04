@@ -1,4 +1,4 @@
-import AuctionState from "./AuctionState";
+import AuctionState from './AuctionState';
 
 
 export class AuctionStateNew extends AuctionState {

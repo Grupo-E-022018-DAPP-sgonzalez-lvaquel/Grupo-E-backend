@@ -1,6 +1,6 @@
 import {
     User
-} from "../User";
+} from '../User';
 
 
 export class UserBuilder {
@@ -14,12 +14,12 @@ export class UserBuilder {
     }
 
     anonymous() {
-        this.user.anonymous = true
+        this.user.anonymous = true;
         return this;
     }
 
     null() {
-        this.user = {equals: (user) => false}
+        this.user = {equals: (user) => false};
         return this;
     }
 }

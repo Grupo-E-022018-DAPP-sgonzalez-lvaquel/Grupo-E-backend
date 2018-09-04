@@ -4,7 +4,7 @@ export class User {
     }
 
     equals(user) {
-        return this == user
+        return this == user;
     }
 }
 

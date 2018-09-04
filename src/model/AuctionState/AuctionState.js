@@ -1,4 +1,4 @@
-import { AuctionStateBuilder } from "../Builders";
+import { AuctionStateBuilder } from '../Builders';
 
 
 export class AuctionState {
