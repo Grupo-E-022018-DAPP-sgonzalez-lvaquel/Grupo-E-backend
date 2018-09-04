@@ -5,11 +5,16 @@ import {
 
 export class UserBuilder {
 
+    constructor(){
+        this.user = new User();
+    }
+
     build() {
-        return new User();
+        return this.user;
     }
 
     anonymous() {
+        this.user.anonymous = true
         return this;
     }
 }
