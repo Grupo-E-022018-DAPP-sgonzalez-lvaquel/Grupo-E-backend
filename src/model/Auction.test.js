@@ -6,11 +6,17 @@ import {
 
 describe('Auction', () => {
     describe('who can bet', () => {
+      let anyUser;
+      let anyOtherUser;
+      let anonymousUser;
+      
+      beforeEach(() => {
+          anyUser = new UserBuilder().build();
+          anyOtherUser = new UserBuilder().build();
+          anonymousUser = new UserBuilder().anonymous().build();
+      });
+
         describe('in a new auction', () => {
-            let anyUser;
-            beforeEach(() => {
-                anyUser = new UserBuilder().build();
-            });
             test('the owner can not bet', () => {
                 // Setup
                 const auction = new AuctionBuilder().withOwner(anyUser).build();
@@ -34,7 +40,6 @@ describe('Auction', () => {
             });
             test('anonymous user can not bet', () => {
                 // Setup
-                const anonymousUser = new UserBuilder().anonymous().build();
                 const auction = new AuctionBuilder().build();
 
                 // Exercise
@@ -45,18 +50,48 @@ describe('Auction', () => {
             });
         });
         describe('in an in progress auction', () => {
-            test('the owner can not bet', () => {
-              expect(true);
-            });
-            test('last bettor can not bet', () => {
-              expect(true);
-            });
-            test('registered user can bet if he is not the last bettor', () => {
-              expect(true);
-            });
-            test('anonymous user can not bet', () => {
-              expect(true);
-            });
+          test('the owner can not bet', () => {
+            // Setup
+            const auction = new AuctionBuilder()
+              .inProgress()
+              .withOwner(anyUser)
+              .build();
+    
+            // Exercise
+            const actual = auction.canUserBet(anyUser);
+    
+            // Verify
+            expect(actual).toBeFalsy();
+          });
+          test('last bettor can not bet', () => {
+            // Setup
+            const auction = new AuctionBuilder()
+              .inProgress()
+              .withLastBettor(anyUser)
+              .build();
+    
+            // Exercise
+            expect(auction.canUserBet(anyUser)).toBeFalsy();
+          });
+          test('registered user can bet if he is not the last bettor', () => {
+            // Setup
+            const auction = new AuctionBuilder()
+              .inProgress()
+              .withLastBettor(anyOtherUser)
+              .build();
+    
+            // Exercise
+            expect(auction.canUserBet(anyUser)).toBeTruthy();
+          });
+          test('anonymous user can not bet', () => {
+            // Setup
+            const auction = new AuctionBuilder()
+              .inProgress()
+              .build();
+    
+            // Exercise
+            expect(auction.canUserBet(anonymousUser)).toBeFalsy();
+          });
         });
         describe('in a finished auction', () => {
             test('the owner can not bet', () => {
