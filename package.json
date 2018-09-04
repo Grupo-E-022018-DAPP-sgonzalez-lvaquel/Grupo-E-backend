@@ -5,7 +5,20 @@
   "main": "index.js",
   "scripts": {
     "start": "node startServer",
+    "lint": "eslint --fix ./src",
     "test": "jest"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm test"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
   },
   "repository": {
     "type": "git",
@@ -19,14 +32,17 @@
   "homepage": "https://github.com/Grupo-E-022018-DAPP-sgonzalez-lvaquel/Grupo-E-frontend#readme",
   "jest": {
     "transform": {
-      "^.+\\.js$": "<rootDir>/node_modules/babel-jest"
+      "^.+\\.jsx?$": "babel-jest"
     }
   },
   "devDependencies": {
     "babel-jest": "^23.4.2",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
-    "jest": "^23.5.0"
+    "eslint": "^5.5.0",
+    "husky": "^0.14.3",
+    "jest": "^23.5.0",
+    "lint-staged": "^7.2.2"
   },
   "dependencies": {
     "babel": "^6.23.0"
