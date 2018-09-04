@@ -95,13 +95,32 @@ describe('Auction', () => {
         });
         describe('in a finished auction', () => {
             test('the owner can not bet', () => {
-              expect(true);
+              // Setup
+              const auction = new AuctionBuilder()
+                .withOwner(anyUser)
+                .ended()
+                .build();
+
+              // Exercise
+              expect(auction.canUserBet(anyUser)).toBeFalsy();
             });
             test('registered users can not bet', () => {
-              expect(true);
+              // Setup
+              const auction = new AuctionBuilder()
+                .ended()
+                .build();
+              
+              // Exercise
+              expect(auction.canUserBet(anyUser)).toBeFalsy();
             });
             test('anonymous users can not bet', () => {
-              expect(true);
+              // Setup
+              const auction = new AuctionBuilder()
+                .ended()
+                .build();
+                
+              // Exercise
+              expect(auction.canUserBet(anonymousUser)).toBeFalsy();
             });
         });
     });

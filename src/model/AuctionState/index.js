@@ -6,3 +6,7 @@ export {
     AuctionStateInProgress
 }
 from './AuctionStateInProgress';
+export {
+    AuctionStateEnded
+}
+from './AuctionStateEnded';

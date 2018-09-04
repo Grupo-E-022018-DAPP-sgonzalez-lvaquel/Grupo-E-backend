@@ -1,4 +1,8 @@
-import { AuctionStateNew, AuctionStateInProgress } from "../AuctionState";
+import { 
+    AuctionStateNew, 
+    AuctionStateInProgress, 
+    AuctionStateEnded 
+} from "../AuctionState";
 
 
 export class AuctionStateBuilder{
@@ -17,6 +21,11 @@ export class AuctionStateBuilder{
 
     inProgress(){
         this.state = new AuctionStateInProgress();
+        return this;
+    }
+
+    ended(){
+        this.state = new AuctionStateEnded();
         return this;
     }
 }

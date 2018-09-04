@@ -24,4 +24,9 @@ export class AuctionBuilder {
         this.auction.lastBettor = bettor
         return this;
     }
+
+    ended(){
+        this.auction.end();
+        return this;
+    }
 }
