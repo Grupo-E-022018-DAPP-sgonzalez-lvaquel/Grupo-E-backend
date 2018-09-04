@@ -17,4 +17,9 @@ export class UserBuilder {
         this.user.anonymous = true
         return this;
     }
+
+    null() {
+        this.user = {equals: (user) => false}
+        return this;
+    }
 }

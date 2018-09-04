@@ -1,15 +1,14 @@
 import {
-    AuctionStateBuilder
+    AuctionStateBuilder,
+    UserBuilder
 } from './Builders';
-import {
-    User
-} from './User';
+
 
 export class Auction {
 
-    constructor(state) {
-        this.owner = User.null()
-        this.lastBettor = User.null()
+    constructor(owner, lastBettor, state) {
+        this.owner = owner || new UserBuilder().null().build();
+        this.lastBettor = lastBettor || new UserBuilder().null().build();
         this.state = state || new AuctionStateBuilder().new().build();
     }
 
