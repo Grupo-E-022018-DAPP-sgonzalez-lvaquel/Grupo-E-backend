@@ -16,6 +16,10 @@ export class Auction {
         this.state = this.state.start();
     }
 
+    end() {
+        this.state = this.state.end();
+    }
+
     isInProgress() {
         return this.state.isInProgress();
     }
