@@ -38,7 +38,7 @@ describe('User', () => {
             });
             test('a user can not bet in an auction if it is finished', () => {
                 // Exercise
-                auction.finish();
+                auction.end();
 
                 expect(auction.canUserBet(anyOtherUser)).toBeTruthy();
             });
