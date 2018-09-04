@@ -40,7 +40,7 @@ describe('User', () => {
                 // Exercise
                 auction.end();
 
-                expect(auction.canUserBet(anyOtherUser)).toBeTruthy();
+                expect(auction.canUserBet(anyOtherUser)).toBeFalsy();
             });
         });
     });
