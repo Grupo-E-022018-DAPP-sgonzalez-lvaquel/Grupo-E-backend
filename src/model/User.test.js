@@ -1,21 +1,46 @@
+import { UserBuilder } from './Builders';
+
 describe('User', () => {
     describe('auction behaviour', () => {
+        let owner;
+
+        beforeEach(() => {
+            owner = new UserBuilder().build();
+        });
+
         test('a user can create an auction', () => {
-            expect(true);
+            // Exercise
+            expect(owner.newAuction()).toBeTruthy();
         });
 
         describe('auction betting', () => {
+            let auction;
+            let anyOtherUser;
+
+            beforeEach(() => {
+                auction = owner.newAuction();
+                anyOtherUser = new UserBuilder().build();
+            });
+
             test('a user can not bet in his own auction', () => {
-                expect(true);
+                // Exercise
+                expect(auction.canUserBet(owner)).toBeFalsy();
             });
             test('a user can not bet in an auction if it is new', () => {
-                expect(true);
+                // Exercise
+                expect(auction.canUserBet(anyOtherUser)).toBeFalsy();
             });
             test('a user can bet in an auction if it is in progress', () => {
-                expect(true);
+                // Exercise
+                auction.start();
+
+                expect(auction.canUserBet(anyOtherUser)).toBeTruthy();
             });
             test('a user can not bet in an auction if it is finished', () => {
-                expect(true);
+                // Exercise
+                auction.end();
+
+                expect(auction.canUserBet(anyOtherUser)).toBeFalsy();
             });
         });
     });
