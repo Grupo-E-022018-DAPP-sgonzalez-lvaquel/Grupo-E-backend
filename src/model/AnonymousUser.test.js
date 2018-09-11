@@ -1,9 +1,17 @@
+import {UserBuilder} from './Builders';
+
 describe('AnonymousUser', () => {
+    let anonymousUser;
+
+    beforeEach(() => {
+        anonymousUser = new UserBuilder().anonymous().build();
+    });
 
     it('can not create an auction', () => {
-        expect(true);
+        expect(anonymousUser.newAuction).toThrow();
     });
+
     it('can not bet on an auction', () => {
-        expect(true);
+        expect(anonymousUser.bet).toThrow();
     });
 });
