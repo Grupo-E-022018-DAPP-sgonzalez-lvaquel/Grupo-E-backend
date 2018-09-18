@@ -38,6 +38,35 @@ export class Auction {
     isOwner(user) {
         return this.owner.equals(user);
     }
+
+    addBet() {
+        this.calculateEndDate();
+        // Register bet
+    }
+
+    calculateEndDate() {
+        if (this.isAboutToEnd() && this.canExtend()) {
+            this.extend();
+        }
+    }
+
+    extend() {
+        const minutes5 = 300000;
+        this.endDate = this.endDate + minutes5;
+    }
+
+    isAboutToEnd() {
+        const minutes5 = 300000;
+        const timeUntilEnd = (this.endDate - this.clock.now());
+        const alreadyEnded = timeUntilEnd < 0;
+        return timeUntilEnd < minutes5 && !alreadyEnded;
+    }
+
+    canExtend() {
+        const days2 = 172800000;
+        const timeExtended = (this.endDate - this.originalEndDate);
+        return timeExtended < days2;
+    }
 }
 
 export default Auction;

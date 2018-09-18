@@ -137,7 +137,7 @@ describe('Auction', () => {
                 auction.addBet(betDTO);
 
                 // Verify
-                expect(auction.endDate()).toEqual(date);
+                expect(auction.endDate).toEqual(date);
             });
         });
         describe('when a user bets in the last 5 minutes before 48hs passed original time of finalization', () => {
@@ -152,7 +152,7 @@ describe('Auction', () => {
                 auction.addBet(betDTO);
 
                 // Verify
-                expect(auction.endDate()).toEqual(extendedDate);
+                expect(auction.endDate).toEqual(extendedDate);
             });
         });
         describe('when a user bets in the last 5 minutes before 48hs passed original time of finalization', () => {
@@ -167,7 +167,7 @@ describe('Auction', () => {
                 auction.addBet(betDTO);
 
                 // Verify
-                expect(auction.endDate()).toEqual(date);
+                expect(auction.endDate).toEqual(date);
             });
         });
     });
