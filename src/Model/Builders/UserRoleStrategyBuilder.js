@@ -1,7 +1,7 @@
 import {
     UserAnonymousRoleStrategy,
     UserRegisteredRoleStrategy
-} from '../UserRoleStrategy';
+} from '../User';
 
 export class UserRoleStrategyBuilder {
 

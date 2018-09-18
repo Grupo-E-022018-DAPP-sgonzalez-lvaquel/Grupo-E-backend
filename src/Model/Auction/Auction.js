@@ -1,7 +1,7 @@
 import {
     AuctionStateBuilder,
     UserBuilder
-} from './Builders';
+} from '../Builders';
 
 
 export class Auction {

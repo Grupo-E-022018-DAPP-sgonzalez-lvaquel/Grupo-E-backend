@@ -1,7 +1,7 @@
 import {
     AuctionBuilder,
     UserBuilder
-} from './Builders';
+} from '../Builders';
 
 
 describe('Auction', () => {

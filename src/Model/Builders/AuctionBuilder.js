@@ -1,4 +1,4 @@
-import Auction from '../Auction';
+import { Auction } from '../Auction';
 
 export class AuctionBuilder {
 

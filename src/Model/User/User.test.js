@@ -1,4 +1,4 @@
-import { UserBuilder } from './Builders';
+import { UserBuilder } from '../Builders';
 
 describe('User', () => {
     describe('auction behaviour', () => {

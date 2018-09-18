@@ -1,4 +1,4 @@
-import { AuctionBuilder } from '../Builders';
+import { AuctionBuilder } from '../../Builders';
 import { UserRoleStrategy } from './UserRoleStrategy';
 
 export class UserRegisteredRoleStrategy extends UserRoleStrategy{

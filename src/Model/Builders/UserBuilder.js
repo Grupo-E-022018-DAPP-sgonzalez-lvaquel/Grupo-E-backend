@@ -1,6 +1,6 @@
 import {
     User
-} from '../User';
+} from '../User/User';
 import {
     UserRoleStrategyBuilder
 } from './';
