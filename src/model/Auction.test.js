@@ -125,19 +125,49 @@ describe('Auction', () => {
         });
     });
     describe('when it ends', () => {
+        const betDTO = {};
         describe('when a user bets before the last 5 minutes', () => {
             test('the time of finalization does not extend', () => {
-                expect(true);
+                // Setup
+                const date = Date.parse('Jan 5, 1995 20:00');
+                const clockMock = {now: () => Date.parse('Jan 4, 1995 20:00')};
+                const auction = new AuctionBuilder().withClock(clockMock).withOriginalEndDate(date).endsAt(date).build();
+
+                // Exercise
+                auction.addBet(betDTO);
+
+                // Verify
+                expect(auction.endDate).toEqual(date);
             });
         });
         describe('when a user bets in the last 5 minutes before 48hs passed original time of finalization', () => {
             test('the time of finalization extends by 5 minutes', () => {
-                expect(true);
+                // Setup
+                const date = Date.parse('Jan 4, 1995 20:00');
+                const extendedDate = Date.parse('Jan 4, 1995 20:05');
+                const clockMock = {now: () => Date.parse('Jan 4, 1995 19:59')};
+                const auction = new AuctionBuilder().withClock(clockMock).withOriginalEndDate(date).endsAt(date).build();
+
+                // Exercise
+                auction.addBet(betDTO);
+
+                // Verify
+                expect(auction.endDate).toEqual(extendedDate);
             });
         });
         describe('when a user bets in the last 5 minutes before 48hs passed original time of finalization', () => {
             test('the time of finalization does not extend', () => {
-                expect(true);
+                // Setup
+                const originalDate = Date.parse('Jan 2, 1995 19:00');
+                const date = Date.parse('Jan 4, 1995 20:00');
+                const clockMock = {now: () => Date.parse('Jan 4, 1995 19:59')};
+                const auction = new AuctionBuilder().withClock(clockMock).withOriginalEndDate(originalDate).endsAt(date).build();
+
+                // Exercise
+                auction.addBet(betDTO);
+
+                // Verify
+                expect(auction.endDate).toEqual(date);
             });
         });
     });
