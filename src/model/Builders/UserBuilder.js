@@ -1,12 +1,15 @@
 import {
     User
 } from '../User';
-
+import {
+    UserRoleStrategyBuilder
+} from './';
 
 export class UserBuilder {
 
     constructor(){
         this.user = new User();
+        this.user.role = new UserRoleStrategyBuilder(this.user).build();
     }
 
     build() {
@@ -14,12 +17,12 @@ export class UserBuilder {
     }
 
     anonymous() {
-        this.user.anonymous = true;
+        this.user.role = new UserRoleStrategyBuilder(this.user).anonymous().build();
         return this;
     }
 
     null() {
-        this.user = {equals: (user) => false};
+        this.user = {equals: () => false};
         return this;
     }
 }

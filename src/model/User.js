@@ -1,8 +1,6 @@
-import { AuctionBuilder } from './Builders';
-
 export class User {
     isAnonymous(){
-        return this.anonymous;
+        return this.role.isAnonymous();
     }
 
     equals(user) {
@@ -10,7 +8,11 @@ export class User {
     }
 
     newAuction(){
-        return new AuctionBuilder().withOwner(this).build();
+        return this.role.newAuction();
+    }
+
+    bet(){
+        throw new Error();
     }
 }
 
