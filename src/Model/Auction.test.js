@@ -27,7 +27,7 @@ describe('Auction', () => {
                 // Verify
                 expect(actual).toBeFalsy();
             });
-            test('registered user can not bet', () => {
+            test('registered user can not   bet', () => {
                 // Setup
                 const anyOtherUser = new UserBuilder().build();
                 const auction = new AuctionBuilder().withOwner(anyUser).build();
