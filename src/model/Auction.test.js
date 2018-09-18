@@ -131,7 +131,7 @@ describe('Auction', () => {
                 // Setup
                 const date = Date.parse('Jan 5, 1995 20:00');
                 const clockMock = {now: () => Date.parse('Jan 4, 1995 20:00')};
-                const auction = new AuctionBuilder().withClock(clockMock).endsAt(date).build();
+                const auction = new AuctionBuilder().withClock(clockMock).withOriginalEndDate(date).endsAt(date).build();
 
                 // Exercise
                 auction.addBet(betDTO);
@@ -146,7 +146,7 @@ describe('Auction', () => {
                 const date = Date.parse('Jan 4, 1995 20:00');
                 const extendedDate = Date.parse('Jan 4, 1995 20:05');
                 const clockMock = {now: () => Date.parse('Jan 4, 1995 19:59')};
-                const auction = new AuctionBuilder().withClock(clockMock).endsAt(date).build();
+                const auction = new AuctionBuilder().withClock(clockMock).withOriginalEndDate(date).endsAt(date).build();
 
                 // Exercise
                 auction.addBet(betDTO);

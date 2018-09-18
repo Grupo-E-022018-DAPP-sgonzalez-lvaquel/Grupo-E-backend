@@ -29,4 +29,19 @@ export class AuctionBuilder {
         this.auction.end();
         return this;
     }
+
+    withClock(clock) {
+        this.auction.clock = clock;
+        return this;
+    }
+
+    withOriginalEndDate(date) {
+        this.auction.originalEndDate = date;
+        return this;
+    }
+
+    endsAt(date) {
+        this.auction.endDate = date;
+        return this;
+    }
 }
