@@ -3,7 +3,7 @@
   "dist": "trusty",
   "group": "stable",
   "script": [
-    (npm test)
+    (npm run test-with-coverage)
   ],
   "install": [
     "(npm install)"
