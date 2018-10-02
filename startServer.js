@@ -3,11 +3,13 @@ import SubastifyWebService from './src/SubastifyWebService';
 import AuctionsWebService, {
     AuctionsCreateHandler,
     AuctionsRetrieveHandler,
+    AuctionsRetrieveByIdHandler,
 } from './src/AuctionsWebService';
 
 const AuctionsService = {
     create: () => Promise.resolve('Auction Created'),
     getAll: () => Promise.resolve('All Auctions Retrieved'),
+    get: (id) => Promise.resolve('Auctions Retrieved Id: ' + id),
 };
 
 const AuctionsAdapter = {
@@ -21,6 +23,7 @@ app.use(SubastifyWebService({
     AuctionsWebService,
     AuctionsCreateHandler,
     AuctionsRetrieveHandler,
+    AuctionsRetrieveByIdHandler,
     AuctionsService,
     AuctionsAdapter,
 }));

@@ -1,9 +1,11 @@
 export default function AuctionsWebService({
     express,
     AuctionsCreateHandler,
-    AuctionsRetrieveHandler
+    AuctionsRetrieveHandler,
+    AuctionsRetrieveByIdHandler,
 }) {
     return express.Router()
         .get('/', AuctionsRetrieveHandler(...arguments))
+        .get('/:id', AuctionsRetrieveByIdHandler(...arguments))
         .post('/', AuctionsCreateHandler(...arguments));
 }
