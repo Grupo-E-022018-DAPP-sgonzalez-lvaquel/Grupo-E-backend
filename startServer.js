@@ -7,12 +7,14 @@ import AuctionsWebService, {
     AuctionsRetrieveHandler,
     AuctionsRetrieveByIdHandler,
     AuctionsUpdateByIdHandler,
+    AuctionsDeleteByIdHandler,
 } from './src/AuctionsWebService';
 
 const AuctionsService = {
     create: () => Promise.resolve('Auction Created'),
     getAll: () => Promise.resolve('All Auctions Retrieved'),
     get: (id) => Promise.resolve('Auctions Retrieved Id: ' + id),
+    delete: (id) => Promise.resolve('Auctions Deleted Id: ' + id),
     update: (id, attrs) => Promise.resolve(`Auction updated id: ${id} with attrs: ${Object.entries(attrs)}`)
 };
 
@@ -30,6 +32,7 @@ app.use(bodyParser.json())
         AuctionsRetrieveHandler,
         AuctionsRetrieveByIdHandler,
         AuctionsUpdateByIdHandler,
+        AuctionsDeleteByIdHandler,
         AuctionsService,
         AuctionsAdapter,
     }));

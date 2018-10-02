@@ -6,7 +6,7 @@ export function AuctionsCreateHandler({
         AuctionsService.create().then(auction =>
             res.json(
                 AuctionsAdapter.serialize(auction)
-            )
+            ).status(201).end()
         ).catch(next);
 }
 
