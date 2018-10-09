@@ -15,12 +15,8 @@ import AuctionsWebService, {
 import AuctionsService from './src/AuctionsService';
 import BetsService from './src/BetsService';
 import AuctionsAdapter from './src/AuctionsAdapter';
+import BetsAdapter from './src/BetsAdapter';
 
-
-const BetsAdapter = {
-    parse: (a) => ({betDTO: () => a}),
-    serialize: (a) => a
-};
 
 const app = express();
 
@@ -39,7 +35,7 @@ app.use(SubastifyWebService({
     AuctionsService: new AuctionsService(),
     AuctionsAdapter: new AuctionsAdapter(),
     BetsService: new BetsService(),
-    BetsAdapter,
+    BetsAdapter: new BetsAdapter(),
 }));
 
 app.listen(3000);
