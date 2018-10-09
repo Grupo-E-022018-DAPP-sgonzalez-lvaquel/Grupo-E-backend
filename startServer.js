@@ -12,15 +12,8 @@ import AuctionsWebService, {
     AuctionsCreateBetsHandler,
     AuctionsRetrieveBetsHandler,
 } from './src/AuctionsWebService';
+import AuctionsService from './src/AuctionsService';
 
-const AuctionsService = {
-    create: () => Promise.resolve('Auction Created'),
-    getAll: () => Promise.resolve('All Auctions Retrieved'),
-    get: (id) => Promise.resolve('Auctions Retrieved Id: ' + id),
-    getRecent: () => Promise.resolve('Recent Auctions'),
-    delete: (id) => Promise.resolve('Auctions Deleted Id: ' + id),
-    update: (id, attrs) => Promise.resolve(`Auction updated id: ${id} with attrs: ${Object.entries(attrs)}`)
-};
 
 const AuctionsAdapter = {
     serialize: (a) => a,
@@ -50,7 +43,7 @@ app.use(SubastifyWebService({
     AuctionsDeleteByIdHandler,
     AuctionsCreateBetsHandler,
     AuctionsRetrieveBetsHandler,
-    AuctionsService,
+    AuctionsService: new AuctionsService(),
     AuctionsAdapter,
     BetsService,
     BetsAdapter,
