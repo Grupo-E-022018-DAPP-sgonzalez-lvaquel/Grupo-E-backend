@@ -14,10 +14,8 @@ import AuctionsWebService, {
 } from './src/AuctionsWebService';
 import AuctionsService from './src/AuctionsService';
 import BetsService from './src/BetsService';
+import AuctionsAdapter from './src/AuctionsAdapter';
 
-const AuctionsAdapter = {
-    serialize: (a) => a,
-};
 
 const BetsAdapter = {
     parse: (a) => ({betDTO: () => a}),
@@ -39,7 +37,7 @@ app.use(SubastifyWebService({
     AuctionsCreateBetsHandler,
     AuctionsRetrieveBetsHandler,
     AuctionsService: new AuctionsService(),
-    AuctionsAdapter,
+    AuctionsAdapter: new AuctionsAdapter(),
     BetsService: new BetsService(),
     BetsAdapter,
 }));
