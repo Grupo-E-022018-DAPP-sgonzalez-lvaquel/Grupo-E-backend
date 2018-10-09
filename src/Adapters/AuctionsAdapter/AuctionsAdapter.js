@@ -1,4 +1,4 @@
-export default class AuctionsAdapter {
+export class AuctionsAdapter {
     serialize(a){
         return a;
     }

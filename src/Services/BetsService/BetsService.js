@@ -1,4 +1,4 @@
-export default class BetsService {
+export class BetsService {
     createBet(auctionId, betDTO) {
         return Promise.resolve(Object.assign({}, betDTO, {
             auctionId

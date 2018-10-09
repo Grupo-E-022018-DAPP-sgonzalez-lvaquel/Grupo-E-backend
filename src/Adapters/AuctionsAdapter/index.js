@@ -1,0 +1,1 @@
+export { AuctionsAdapter } from './AuctionsAdapter';

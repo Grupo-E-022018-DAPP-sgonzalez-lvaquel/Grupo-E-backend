@@ -1,4 +1,4 @@
-export default class BetsAdapter {
+export class BetsAdapter {
     parse(a) {
         return {
             betDTO: () => a

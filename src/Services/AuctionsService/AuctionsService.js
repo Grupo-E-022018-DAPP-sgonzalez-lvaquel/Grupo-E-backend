@@ -1,4 +1,4 @@
-export default class AuctionsService {
+export class AuctionsService {
 
     constructor({
         AuctionBuilder,
