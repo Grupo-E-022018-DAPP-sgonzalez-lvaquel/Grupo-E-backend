@@ -1,4 +1,4 @@
-export default function SubastifyWebService({
+export function SubastifyWebService({
     express,
     bodyParser,
     AuctionsWebService

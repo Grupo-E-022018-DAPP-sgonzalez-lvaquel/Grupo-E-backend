@@ -1,5 +1,4 @@
-import AuctionsWebService from './AuctionsWebService';
-
+export { AuctionsWebService } from './AuctionsWebService';
 export { AuctionsCreateHandler } from './AuctionsCreateHandler';
 export { AuctionsRetrieveHandler } from './AuctionsRetrieveHandler';
 export { AuctionsRetrieveByIdHandler } from './AuctionsRetrieveByIdHandler';
@@ -8,5 +7,3 @@ export { AuctionsDeleteByIdHandler } from './AuctionsDeleteByIdHandler';
 export { AuctionsCreateBetsHandler } from './AuctionsCreateBetsHandler';
 export { AuctionsRetrieveBetsHandler } from './AuctionsRetrieveBetsHandler';
 export { AuctionsRetrieveRecentHandler } from './AuctionsRetrieveRecentHandler';
-
-export default AuctionsWebService;

@@ -1,8 +1,9 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 
-import SubastifyWebService from './src/SubastifyWebService';
-import AuctionsWebService, {
+import {
+    SubastifyWebService,
+    AuctionsWebService, 
     AuctionsCreateHandler,
     AuctionsRetrieveHandler,
     AuctionsRetrieveByIdHandler,
@@ -11,7 +12,7 @@ import AuctionsWebService, {
     AuctionsDeleteByIdHandler,
     AuctionsCreateBetsHandler,
     AuctionsRetrieveBetsHandler,
-} from './src/AuctionsWebService';
+} from './src/WebServices';
 import {
     AuctionsService,
     BetsService

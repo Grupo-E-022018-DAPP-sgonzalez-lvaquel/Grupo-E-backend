@@ -1,4 +1,4 @@
-export default function AuctionsWebService({
+export function AuctionsWebService({
     express,
     AuctionsCreateHandler,
     AuctionsRetrieveHandler,
