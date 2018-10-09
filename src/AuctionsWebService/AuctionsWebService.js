@@ -3,6 +3,7 @@ export default function AuctionsWebService({
     AuctionsCreateHandler,
     AuctionsRetrieveHandler,
     AuctionsRetrieveByIdHandler,
+    AuctionsRetrieveRecentHandler,
     AuctionsUpdateByIdHandler,
     AuctionsDeleteByIdHandler,
     AuctionsCreateBetsHandler,
@@ -10,6 +11,7 @@ export default function AuctionsWebService({
 }) {
     return express.Router()
         .get('/', AuctionsRetrieveHandler(...arguments))
+        .get('/recent', AuctionsRetrieveRecentHandler(...arguments))
         .get('/:id', AuctionsRetrieveByIdHandler(...arguments))
         .patch('/:id', AuctionsUpdateByIdHandler(...arguments))
         .delete('/:id', AuctionsDeleteByIdHandler(...arguments))
