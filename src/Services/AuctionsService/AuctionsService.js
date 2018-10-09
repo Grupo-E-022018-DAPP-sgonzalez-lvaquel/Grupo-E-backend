@@ -15,22 +15,30 @@ export class AuctionsService {
     }
 
     getAll() {
-        return Promise.resolve('All Auctions Retrieved');
+        return this.auctionRepository.getAll();
     }
 
     get(id) {
-        return Promise.resolve('Auctions Retrieved Id: ' + id);
+        return this.auctionRepository.get(id);
     }
 
     getRecent() {
-        return Promise.resolve('Recent Auctions');
+        return this.auctionRepository.getRecent();
     }
 
     delete(id) {
-        return Promise.resolve('Auctions Deleted Id: ' + id);
+        return this.auctionRepository.delete(id);
     }
 
-    update(id, attrs) {
-        return Promise.resolve(`Auction updated id: ${id} with attrs: ${Object.entries(attrs)}`);
+    update(id, {
+        owner,
+        endsAt
+    }) {
+        const auction = new this.AuctionBuilder()
+            .withId(id)
+            .withOwner(owner)
+            .endsAt(endsAt)
+            .build();
+        return this.auctionRepository.save(auction);
     }
 }

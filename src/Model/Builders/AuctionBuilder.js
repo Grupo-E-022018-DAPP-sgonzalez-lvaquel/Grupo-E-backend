@@ -44,4 +44,9 @@ export class AuctionBuilder {
         this.auction.endDate = date;
         return this;
     }
+
+    withId(id) {
+        this.auction.id = id;
+        return this;
+    }
 }
