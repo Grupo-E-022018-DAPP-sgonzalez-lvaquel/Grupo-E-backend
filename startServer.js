@@ -16,7 +16,8 @@ import AuctionsService from './src/AuctionsService';
 import BetsService from './src/BetsService';
 import AuctionsAdapter from './src/AuctionsAdapter';
 import BetsAdapter from './src/BetsAdapter';
-
+import { AuctionBuilder } from './src/Model/Builders';
+import { AuctionRepository } from './src/Repositories';
 
 const app = express();
 
@@ -32,7 +33,10 @@ app.use(SubastifyWebService({
     AuctionsDeleteByIdHandler,
     AuctionsCreateBetsHandler,
     AuctionsRetrieveBetsHandler,
-    AuctionsService: new AuctionsService(),
+    AuctionsService: new AuctionsService({
+        AuctionBuilder, 
+        auctionRepository: new AuctionRepository(), 
+    }),
     AuctionsAdapter: new AuctionsAdapter(),
     BetsService: new BetsService(),
     BetsAdapter: new BetsAdapter(),
