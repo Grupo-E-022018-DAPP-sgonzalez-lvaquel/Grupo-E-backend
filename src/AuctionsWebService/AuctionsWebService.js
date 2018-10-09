@@ -5,13 +5,15 @@ export default function AuctionsWebService({
     AuctionsRetrieveByIdHandler,
     AuctionsUpdateByIdHandler,
     AuctionsDeleteByIdHandler,
-    AuctionsCreateBetHandler,
+    AuctionsCreateBetsHandler,
+    AuctionsRetrieveBetsHandler,
 }) {
     return express.Router()
         .get('/', AuctionsRetrieveHandler(...arguments))
         .get('/:id', AuctionsRetrieveByIdHandler(...arguments))
         .patch('/:id', AuctionsUpdateByIdHandler(...arguments))
         .delete('/:id', AuctionsDeleteByIdHandler(...arguments))
-        .post('/:id/bets', AuctionsCreateBetHandler(...arguments))
+        .get('/:id/bets', AuctionsRetrieveBetsHandler(...arguments))
+        .post('/:id/bets', AuctionsCreateBetsHandler(...arguments))
         .post('/', AuctionsCreateHandler(...arguments));
 }
