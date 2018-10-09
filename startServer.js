@@ -13,15 +13,10 @@ import AuctionsWebService, {
     AuctionsRetrieveBetsHandler,
 } from './src/AuctionsWebService';
 import AuctionsService from './src/AuctionsService';
-
+import BetsService from './src/BetsService';
 
 const AuctionsAdapter = {
     serialize: (a) => a,
-};
-
-const BetsService = {
-    createBet: (auctionId, betDTO) => Promise.resolve(Object.assign({}, betDTO, {auctionId})),
-    getByAuctionId: (auctionId) => Promise.resolve([{id:1, auctionId}])
 };
 
 const BetsAdapter = {
@@ -45,7 +40,7 @@ app.use(SubastifyWebService({
     AuctionsRetrieveBetsHandler,
     AuctionsService: new AuctionsService(),
     AuctionsAdapter,
-    BetsService,
+    BetsService: new BetsService(),
     BetsAdapter,
 }));
 
