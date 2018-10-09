@@ -5,5 +5,6 @@ export { AuctionsRetrieveHandler } from './AuctionsRetrieveHandler';
 export { AuctionsRetrieveByIdHandler } from './AuctionsRetrieveByIdHandler';
 export { AuctionsUpdateByIdHandler } from './AuctionsUpdateByIdHandler';
 export { AuctionsDeleteByIdHandler } from './AuctionsDeleteByIdHandler';
+export { AuctionsCreateBetHandler } from './AuctionsCreateBetHandler';
 
 export default AuctionsWebService;

@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import SubastifyWebService from './src/SubastifyWebService';
 import AuctionsWebService, {
     AuctionsCreateHandler,
+    AuctionsCreateBetHandler,
     AuctionsRetrieveHandler,
     AuctionsRetrieveByIdHandler,
     AuctionsUpdateByIdHandler,
@@ -22,19 +23,31 @@ const AuctionsAdapter = {
     serialize: (a) => a,
 };
 
+const BetsService = {
+    createBet: (auctionId, betDTO) => Object.assign({}, betDTO, {auctionId})
+};
+
+const BetsAdapter = {
+    parse: (a) => ({betDTO: () => a}),
+    serialize: (a) => a
+};
+
 const app = express();
 
-app.use(bodyParser.json())
-    .use(SubastifyWebService({
-        express,
-        AuctionsWebService,
-        AuctionsCreateHandler,
-        AuctionsRetrieveHandler,
-        AuctionsRetrieveByIdHandler,
-        AuctionsUpdateByIdHandler,
-        AuctionsDeleteByIdHandler,
-        AuctionsService,
-        AuctionsAdapter,
-    }));
+app.use(SubastifyWebService({
+    express,
+    bodyParser,
+    AuctionsWebService,
+    AuctionsCreateHandler,
+    AuctionsCreateBetHandler,
+    AuctionsRetrieveHandler,
+    AuctionsRetrieveByIdHandler,
+    AuctionsUpdateByIdHandler,
+    AuctionsDeleteByIdHandler,
+    AuctionsService,
+    AuctionsAdapter,
+    BetsService,
+    BetsAdapter,
+}));
 
 app.listen(3000);
