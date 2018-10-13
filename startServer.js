@@ -27,6 +27,26 @@ import {
 import {
     AuctionsRepository
 } from './src/Repositories';
+import {
+    Sequelize,
+} from 'sequelize';
+import { 
+    configureDBConnection, 
+} from './configureDBConnection';
+import { 
+    AuctionSchema,
+    UserSchema,
+} from './src/Schemas';
+
+const sequelize = configureDBConnection(Sequelize);
+const userSchema = UserSchema({
+    Sequelize,
+    sequelize,
+});
+const auctionSchema = AuctionSchema({
+    Sequelize,
+    sequelize,
+});
 
 const app = express();
 
@@ -44,7 +64,10 @@ app.use(SubastifyWebService({
     AuctionsRetrieveBetsHandler,
     AuctionsService: new AuctionsService({
         AuctionBuilder,
-        auctionsRepository: new AuctionsRepository(),
+        auctionsRepository: new AuctionsRepository({
+            sequelize,
+            auctionSchema,
+        }),
     }),
     AuctionsAdapter: new AuctionsAdapter(),
     BetsService: new BetsService(),
