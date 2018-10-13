@@ -3,7 +3,7 @@ export function AuctionSchema({
     sequelize,
 }) {
     return sequelize.define('auction', {
-        owner_id: {
+        ownerId: {
             type: Sequelize.INTEGER,
             references: {
                 model: 'users',
