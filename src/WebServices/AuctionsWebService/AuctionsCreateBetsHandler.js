@@ -4,8 +4,7 @@ export function AuctionsCreateBetsHandler({
 }) {
     return (req, res, next) => {
         const auctionId = req.params.id;
-        const betDTO = BetsAdapter.parse(req.body).betDTO();
-        BetsService.createBet(auctionId, betDTO).then(bet => {
+        BetsService.createBet(auctionId, req.body).then(bet => {
             res.json(
                 BetsAdapter.serialize(bet)
             );
