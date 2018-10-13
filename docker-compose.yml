@@ -1,11 +1,21 @@
-version: '2'
+version: '3'
 
 services:
   db:
     image: postgres
     restart: always
+    volumes:
+      - ${PWD}/db:/db
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
       POSTGRES_DB: subastify
-      PGDATA: ./db/subastify
+      PGDATA: /db/subastify
+  api:  
+    depends_on:
+      - db
+    build: .
+    volumes:
+      - ${PWD}:/usr/src/app
+    ports:
+     - "3000:3000"

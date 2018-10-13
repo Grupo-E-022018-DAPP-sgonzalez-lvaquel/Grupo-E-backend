@@ -65,6 +65,7 @@ app.use(SubastifyWebService({
     AuctionsService: new AuctionsService({
         AuctionBuilder,
         auctionsRepository: new AuctionsRepository({
+            Sequelize,
             sequelize,
             auctionSchema,
         }),
