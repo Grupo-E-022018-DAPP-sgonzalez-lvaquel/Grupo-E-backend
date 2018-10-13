@@ -53,7 +53,13 @@ export class AuctionsRepository {
     delete(id) {
         return this.sequelize.sync()
             .then(() =>
-                this.auctionSchema.deleteById(id)
+                this.auctionSchema.destroy({
+                    where: {
+                        id: {
+                            [this.op.eq]: id
+                        }
+                    }
+                })
             );
     }
 }
