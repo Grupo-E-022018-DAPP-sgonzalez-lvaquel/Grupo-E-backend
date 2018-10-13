@@ -1,14 +1,28 @@
 export class BetsService {
-    createBet(auctionId, betDTO) {
-        return Promise.resolve(Object.assign({}, betDTO, {
-            auctionId
-        }));
+
+    constructor({
+        BetBuilder,
+        betsRepository,
+    }) {
+        this.BetBuilder = BetBuilder;
+        this.betsRepository = betsRepository;
+    }
+
+    createBet(auctionId, {
+        amount,
+        bettor,
+    }) {
+        const bet = new this.BetBuilder()
+            .withAuction({
+                id: auctionId
+            })
+            .withAmount(amount)
+            .withBettor(bettor)
+            .build();
+        return this.betsRepository.save(bet);
     }
 
     getByAuctionId(auctionId) {
-        return Promise.resolve([{
-            id: 1,
-            auctionId
-        }]);
+        return this.betsRepository.getByAuctionId(auctionId);
     }
 }
