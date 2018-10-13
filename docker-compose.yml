@@ -4,8 +4,6 @@ services:
   db:
     image: postgres
     restart: always
-    volumes:
-      - ${PWD}/db:/db
     environment:
       POSTGRES_USER: root
       POSTGRES_PASSWORD: root
@@ -19,3 +17,12 @@ services:
       - ${PWD}:/usr/src/app
     ports:
      - "3000:3000"
+  db_browser:
+    depends_on:
+      - db
+    image: dpage/pgadmin4
+    ports:
+      - "80:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@domain.com
+      PGADMIN_DEFAULT_PASSWORD: SuperSecret
