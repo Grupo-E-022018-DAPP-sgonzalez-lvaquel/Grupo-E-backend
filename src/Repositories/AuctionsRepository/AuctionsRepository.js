@@ -1,22 +1,57 @@
 export class AuctionsRepository {
-    save(auction) {
-        return Promise.resolve(auction);
+
+    constructor({
+        Sequelize,
+        sequelize,
+        auctionSchema,
+    }) {
+        this.op = Sequelize.Op;
+        this.sequelize = sequelize;
+        this.auctionSchema = auctionSchema;
     }
-    
+
+    save(auction) {
+        return this.sequelize.sync()
+            .then(() =>
+                this.auctionSchema.create(auction)
+            );
+    }
+
     getAll() {
-        return Promise.resolve([]);
+        return this.sequelize.sync()
+            .then(() =>
+                this.auctionSchema.findAll()
+            );
     }
 
     get(id) {
-        return Promise.resolve({});
+        return this.sequelize.sync()
+            .then(() =>
+                this.auctionSchema.findById(id)
+            );
     }
 
     getRecent() {
-        return Promise.resolve([]);
+        return this.sequelize.sync()
+            .then(() =>
+                this.auctionSchema.findAll({
+                    where: {
+                        createdAt: {
+                            [this.op.gt]: this.yesterday,
+                        },
+                    },
+                })
+            );
+    }
+
+    get yesterday() {
+        return new Date(Date.now() - (24 * 60 * 60 * 1000));
     }
 
     delete(id) {
-        return Promise.resolve();
+        return this.sequelize.sync()
+            .then(() =>
+                this.auctionSchema.deleteById(id)
+            );
     }
-
 }
