@@ -22,10 +22,12 @@ import {
     BetsAdapter
 } from './src/Adapters';
 import {
-    AuctionBuilder
+    AuctionBuilder,
+    BetBuilder,
 } from './src/Model/Builders';
 import {
-    AuctionsRepository
+    AuctionsRepository,
+    BetsRepository,
 } from './src/Repositories';
 import {
     Sequelize,
@@ -35,6 +37,7 @@ import {
 } from './configureDBConnection';
 import { 
     AuctionSchema,
+    BetSchema,
     UserSchema,
 } from './src/Schemas';
 
@@ -44,6 +47,10 @@ const userSchema = UserSchema({
     sequelize,
 });
 const auctionSchema = AuctionSchema({
+    Sequelize,
+    sequelize,
+});
+const betSchema = BetSchema({
     Sequelize,
     sequelize,
 });
@@ -71,7 +78,14 @@ app.use(SubastifyWebService({
         }),
     }),
     auctionsAdapter: new AuctionsAdapter(),
-    BetsService: new BetsService(),
+    BetsService: new BetsService({
+        BetBuilder,
+        betsRepository: new BetsRepository({
+            Sequelize,
+            sequelize,
+            betSchema,
+        }),
+    }),
     BetsAdapter: new BetsAdapter(),
 }));
 
