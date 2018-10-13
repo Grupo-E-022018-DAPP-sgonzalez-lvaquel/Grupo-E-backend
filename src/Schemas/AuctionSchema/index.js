@@ -1,0 +1,1 @@
+export { AuctionSchema } from './AuctionSchema';
