@@ -19,7 +19,13 @@
   npm start
   ```
 
+- Iniciar base de datos de desarrollo
+  ``` bash
+  docker-compose up
+  ```
+
 - Ejecutar tests
+  
   ``` bash
   npm test
   ```  
