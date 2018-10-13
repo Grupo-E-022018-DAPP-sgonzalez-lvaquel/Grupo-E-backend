@@ -25,7 +25,7 @@ import {
     AuctionBuilder
 } from './src/Model/Builders';
 import {
-    AuctionRepository
+    AuctionsRepository
 } from './src/Repositories';
 
 const app = express();
@@ -44,7 +44,7 @@ app.use(SubastifyWebService({
     AuctionsRetrieveBetsHandler,
     AuctionsService: new AuctionsService({
         AuctionBuilder,
-        auctionRepository: new AuctionRepository(),
+        auctionsRepository: new AuctionsRepository(),
     }),
     AuctionsAdapter: new AuctionsAdapter(),
     BetsService: new BetsService(),

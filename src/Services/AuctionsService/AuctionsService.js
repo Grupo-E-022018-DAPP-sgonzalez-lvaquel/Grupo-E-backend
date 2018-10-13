@@ -2,32 +2,32 @@ export class AuctionsService {
 
     constructor({
         AuctionBuilder,
-        auctionRepository
+        auctionsRepository
     }) {
         this.AuctionBuilder = AuctionBuilder;
-        this.auctionRepository = auctionRepository;
+        this.auctionsRepository = auctionsRepository;
     }
 
     create() {
         const auction = new this.AuctionBuilder()
             .build();
-        return this.auctionRepository.save(auction);
+        return this.auctionsRepository.save(auction);
     }
 
     getAll() {
-        return this.auctionRepository.getAll();
+        return this.auctionsRepository.getAll();
     }
 
     get(id) {
-        return this.auctionRepository.get(id);
+        return this.auctionsRepository.get(id);
     }
 
     getRecent() {
-        return this.auctionRepository.getRecent();
+        return this.auctionsRepository.getRecent();
     }
 
     delete(id) {
-        return this.auctionRepository.delete(id);
+        return this.auctionsRepository.delete(id);
     }
 
     update(id, {
@@ -39,6 +39,6 @@ export class AuctionsService {
             .withOwner(owner)
             .endsAt(endsAt)
             .build();
-        return this.auctionRepository.save(auction);
+        return this.auctionsRepository.save(auction);
     }
 }
