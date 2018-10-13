@@ -1,11 +1,11 @@
 export function AuctionsRetrieveRecentHandler({
-    AuctionsAdapter,
+    auctionsAdapter,
     AuctionsService,
 }) {
     return (req, res, next) => {
         AuctionsService.getRecent().then(auctions => {
             res.json(
-                AuctionsAdapter.serialize(auctions)
+                auctionsAdapter.serialize(auctions)
             );
         }).catch(next);
     };

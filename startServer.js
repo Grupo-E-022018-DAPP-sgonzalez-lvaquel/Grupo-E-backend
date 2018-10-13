@@ -70,7 +70,7 @@ app.use(SubastifyWebService({
             auctionSchema,
         }),
     }),
-    AuctionsAdapter: new AuctionsAdapter(),
+    auctionsAdapter: new AuctionsAdapter(),
     BetsService: new BetsService(),
     BetsAdapter: new BetsAdapter(),
 }));

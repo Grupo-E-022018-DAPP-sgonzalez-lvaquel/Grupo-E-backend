@@ -13,7 +13,9 @@ export class AuctionsRepository {
     save(auction) {
         return this.sequelize.sync()
             .then(() =>
-                this.auctionSchema.create(auction)
+                this.auctionSchema.create({
+                    owner_id: auction.owner.id
+                })
             );
     }
 

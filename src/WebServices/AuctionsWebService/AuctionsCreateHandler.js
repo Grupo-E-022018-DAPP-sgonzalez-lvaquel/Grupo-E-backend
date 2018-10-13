@@ -1,11 +1,11 @@
 export function AuctionsCreateHandler({
     AuctionsService,
-    AuctionsAdapter
+    auctionsAdapter,
 }) {
     return (req, res, next) =>
-        AuctionsService.create().then(auction =>
+        AuctionsService.create(req.body).then(auction =>
             res.json(
-                AuctionsAdapter.serialize(auction)
+                auctionsAdapter.serialize(auction)
             ).status(201).end()
         ).catch(next);
 }

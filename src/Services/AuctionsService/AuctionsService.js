@@ -8,8 +8,11 @@ export class AuctionsService {
         this.auctionsRepository = auctionsRepository;
     }
 
-    create() {
+    create({
+        owner
+    }) {
         const auction = new this.AuctionBuilder()
+            .withOwner(owner)
             .build();
         return this.auctionsRepository.save(auction);
     }
