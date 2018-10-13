@@ -10,7 +10,7 @@ export function AuctionSchema({
         owner_id: {
             type: Sequelize.INTEGER,
             references: {
-                model: 'user',
+                model: 'users',
                 key: 'id',
                 deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE,
             },
