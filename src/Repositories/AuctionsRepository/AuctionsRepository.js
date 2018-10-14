@@ -18,7 +18,8 @@ export class AuctionsRepository extends SequelizeRepository {
         ownerId,
         lastBettorId,
         originalEndDate,
-        endDate
+        endDate,
+        state,
     }, savedBets) {
         const owner = this.usersRepository.get(ownerId);
         const lastBettor = this.usersRepository.get(lastBettorId);
@@ -33,15 +34,18 @@ export class AuctionsRepository extends SequelizeRepository {
             .withOwner(owner)
             .endsAt(endDate)
             .withBets(savedBets)
+            .withState(state)
             .build()
         );
     }
 
     save(auction) {
-        const savedAuction = this.schema.create({
+        const savedAuction = this.schema.upsert({
+            id: auction.id,
             ownerId: auction.owner.id,
             endDate: auction.endDate,
             originalEndDate: auction.originalEndDate,
+            state: auction.state.name,
         });
         const savedBets = this.betsRepository.saveAll(auction.bets);
 

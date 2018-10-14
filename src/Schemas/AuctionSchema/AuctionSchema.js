@@ -26,7 +26,10 @@ export function AuctionSchema({
             allowNull: false,
             type: Sequelize.DATE
         },
-
+        state: {
+            allowNull: false,
+            type: Sequelize.STRING,
+        }
     }, {
         paranoid: true,
     });

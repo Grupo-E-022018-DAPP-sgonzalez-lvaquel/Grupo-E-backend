@@ -54,9 +54,7 @@ describe('AuctionsRepository', () => {
             .build();
 
         auctionsRepository = new AuctionsRepository({
-            Sequelize: {
-                Op: {},
-            },
+            Sequelize,
             betsRepository,
             usersRepository,
             sequelize,
