@@ -1,5 +1,11 @@
 import baseConfig from './baseConfig';
 
-const envConfig = require('./' + process.env.NODE_ENV).default;
+let envConfig;
 
-export default {...baseConfig, ...envConfig};
+try {
+    envConfig = require('./' + process.env.NODE_ENV).default;
+} catch (e) {
+    envConfig = require('./development').default;
+}
+
+export default Object.assign({}, baseConfig, envConfig);
