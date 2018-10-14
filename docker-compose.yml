@@ -9,7 +9,11 @@ services:
       POSTGRES_PASSWORD: root
       POSTGRES_DB: subastify
       PGDATA: /db/subastify
+    ports:
+     - "5432:5432"
   api:  
+    environment:
+      NODE_ENV: docker
     depends_on:
       - db
     build: .
