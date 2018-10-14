@@ -1,12 +1,12 @@
 export function AuctionsCreateBetsHandler({
-    BetsService,
-    BetsAdapter,
+    betsService,
+    betsAdapter,
 }) {
     return (req, res, next) => {
         const auctionId = req.params.id;
-        BetsService.createBet(auctionId, req.body).then(bet => {
+        betsService.createBet(auctionId, req.body).then(bet => {
             res.json(
-                BetsAdapter.serialize(bet)
+                betsAdapter.serialize(bet)
             );
         }).catch(next);
     };

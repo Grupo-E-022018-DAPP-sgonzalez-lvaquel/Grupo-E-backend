@@ -1,11 +1,11 @@
 export function AuctionsRetrieveBetsHandler({
-    BetsService,
-    BetsAdapter,
+    betsService,
+    betsAdapter,
 }) {
     return (req, res, next) => {
-        BetsService.getByAuctionId(req.params.id).then(bets => {
+        betsService.getByAuctionId(req.params.id).then(bets => {
             res.json(
-                BetsAdapter.serialize(
+                betsAdapter.serialize(
                     bets
                 )
             );

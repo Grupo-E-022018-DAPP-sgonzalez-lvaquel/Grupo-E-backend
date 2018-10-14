@@ -1,8 +1,8 @@
 export function AuctionsDeleteByIdHandler({
-    AuctionsService
+    auctionsService,
 }) {
     return (req, res, next) =>
-        AuctionsService.delete(req.params.id).then(() =>
+        auctionsService.delete(req.params.id).then(() =>
             res.status(204).end()
         ).catch(next);
 }

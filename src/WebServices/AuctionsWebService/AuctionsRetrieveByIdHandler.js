@@ -1,9 +1,9 @@
 export function AuctionsRetrieveByIdHandler({
-    AuctionsService,
+    auctionsService,
     auctionsAdapter
 }) {
     return (req, res, next) =>
-        AuctionsService.get(req.params.id).then(auction =>
+        auctionsService.get(req.params.id).then(auction =>
             res.json(auctionsAdapter.serialize(auction))
                 .status(200).end()
         ).catch(next);

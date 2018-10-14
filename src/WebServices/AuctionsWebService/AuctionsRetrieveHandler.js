@@ -1,9 +1,9 @@
 export function AuctionsRetrieveHandler({
-    AuctionsService,
-    auctionsAdapter
+    auctionsService,
+    auctionsAdapter,
 }) {
     return (req, res, next) =>
-        AuctionsService.getAll().then(auctions =>
+        auctionsService.getAll().then(auctions =>
             res.json(auctionsAdapter.serialize(auctions))
                 .status(200).end()
         ).catch(next);

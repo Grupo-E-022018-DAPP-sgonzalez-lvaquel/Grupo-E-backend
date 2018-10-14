@@ -1,9 +1,9 @@
 export function AuctionsCreateHandler({
-    AuctionsService,
+    auctionsService,
     auctionsAdapter,
 }) {
     return (req, res, next) =>
-        AuctionsService.create(req.body).then(auction =>
+        auctionsService.create(req.body).then(auction =>
             res.json(
                 auctionsAdapter.serialize(auction)
             ).status(201).end()

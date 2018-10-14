@@ -1,9 +1,9 @@
 export function AuctionsRetrieveRecentHandler({
     auctionsAdapter,
-    AuctionsService,
+    auctionsService,
 }) {
     return (req, res, next) => {
-        AuctionsService.getRecent().then(auctions => {
+        auctionsService.getRecent().then(auctions => {
             res.json(
                 auctionsAdapter.serialize(auctions)
             );
