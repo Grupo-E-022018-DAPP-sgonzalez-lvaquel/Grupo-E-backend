@@ -4,13 +4,29 @@ export function AuctionSchema({
 }) {
     return sequelize.define('auction', {
         ownerId: {
+            allowNull: false,
             type: Sequelize.INTEGER,
             references: {
                 model: 'users',
                 key: 'id',
-                deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE,
             },
-        }
+        },
+        lastBettorId: {
+            type: Sequelize.INTEGER,
+            references: {
+                model: 'users',
+                key: 'id',
+            },
+        },
+        originalEndDate: {
+            allowNull: false,
+            type: Sequelize.DATE
+        },
+        endDate: {
+            allowNull: false,
+            type: Sequelize.DATE
+        },
+
     }, {
         paranoid: true,
     });

@@ -13,7 +13,6 @@ export function BetSchema({
             references: {
                 model: 'auctions',
                 key: 'id',
-                deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE,
             },
         },
         bettorId: {
@@ -22,7 +21,6 @@ export function BetSchema({
             references: {
                 model: 'users',
                 key: 'id',
-                deferrable: Sequelize.Deferrable.INITIALLY_IMMEDIATE,
             }
         },
     }, {
