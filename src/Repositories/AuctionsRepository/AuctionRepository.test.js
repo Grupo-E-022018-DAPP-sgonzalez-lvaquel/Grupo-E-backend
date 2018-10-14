@@ -1,4 +1,6 @@
-let Sequelize = require('sequelize-mock');
+import {
+    Sequelize
+} from 'sequelize';
 import {
     AuctionsRepository
 } from './AuctionsRepository';
@@ -8,6 +10,9 @@ import {
 import {
     AuctionBuilder
 } from '../../Model/Builders';
+import {
+    configureDBConnection
+} from '../../../configureDBConnection';
 
 describe('AuctionsRepository', () => {
 
@@ -35,7 +40,7 @@ describe('AuctionsRepository', () => {
         usersRepository = jest.fn();
         usersRepository.get = jest.fn((id) => users.find(user => user.id == id));
 
-        sequelize = new Sequelize();
+        sequelize = configureDBConnection(Sequelize);
 
         schema = AuctionSchema({
             Sequelize,

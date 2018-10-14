@@ -7,10 +7,12 @@ import {
 import {
     BetSchema
 } from '../../Schemas';
-
-
-var Sequelize = require('sequelize-mock');
-
+import {
+    configureDBConnection
+} from '../../../configureDBConnection';
+import {
+    Sequelize
+} from 'sequelize';
 
 
 describe('BetsRepository', () => {
@@ -29,10 +31,10 @@ describe('BetsRepository', () => {
     beforeAll(() => {
 
         auction = jest.fn();
-
         auction.id = 1;
 
         bettor = jest.fn();
+        bettor.id = 1;
 
         usersRepository = {
             get: jest.fn().mockReturnValue(bettor)
@@ -45,7 +47,7 @@ describe('BetsRepository', () => {
 
 
     beforeEach(() => {
-        sequelize = new Sequelize();
+        sequelize = configureDBConnection(Sequelize);
 
         schema = BetSchema({
             Sequelize,
@@ -53,11 +55,7 @@ describe('BetsRepository', () => {
         });
 
         betsRepository = new BetsRepository({
-            Sequelize: {
-                Op: {
-                    eq: jest.fn(),
-                }
-            },
+            Sequelize,
             sequelize,
             schema,
             usersRepository,
@@ -80,9 +78,11 @@ describe('BetsRepository', () => {
     });
 
     it('returns an equal object', () => {
-        return betsRepository.save(bet1).then(savedBet => {
-            Object.keys(bet1).forEach(key => {
-                expect(savedBet[key]).toEqual(bet1[key]);
+        return sequelize.sync().then(() => {
+            betsRepository.save(bet1).then(savedBet => {
+                Object.keys(bet1).forEach(key => {
+                    expect(savedBet[key]).toEqual(bet1[key]);
+                });
             });
         });
     });
