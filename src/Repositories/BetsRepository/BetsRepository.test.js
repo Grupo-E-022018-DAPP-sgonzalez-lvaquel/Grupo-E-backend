@@ -18,7 +18,7 @@ describe('BetsRepository', () => {
     let auction;
     let bettor;
     let sequelize;
-    let betSchema;
+    let schema;
     let betsRepository;
     let usersRepository;
     let auctionsRepository;
@@ -47,7 +47,7 @@ describe('BetsRepository', () => {
     beforeEach(() => {
         sequelize = new Sequelize();
 
-        betSchema = BetSchema({
+        schema = BetSchema({
             Sequelize,
             sequelize,
         });
@@ -59,7 +59,7 @@ describe('BetsRepository', () => {
                 }
             },
             sequelize,
-            betSchema,
+            schema,
             usersRepository,
             auctionsRepository,
         });

@@ -1,65 +1,78 @@
-export class AuctionsRepository {
+import {
+    AuctionBuilder
+} from '../../Model/Builders';
+import {
+    SequelizeRepository
+} from '../SequelizeRepository';
+
+export class AuctionsRepository extends SequelizeRepository {
 
     constructor({
-        Sequelize,
-        sequelize,
-        auctionSchema,
+        betsRepository,
+        usersRepository,
+        ...otherProps
     }) {
-        this.op = Sequelize.Op;
-        this.sequelize = sequelize;
-        this.auctionSchema = auctionSchema;
+        super(otherProps);
+        this.betsRepository = betsRepository;
+        this.usersRepository = usersRepository;
+    }
+
+    toModel({
+        id,
+        ownerId,
+        lastBettorId,
+        originalEndDate,
+        endDate
+    }, savedBets) {
+        const owner = this.usersRepository.get(ownerId);
+        const lastBettor = this.usersRepository.get(lastBettorId);
+
+        return Promise.all([
+            owner,
+            lastBettor,
+        ]).then(([owner, lastBettor]) => new AuctionBuilder()
+            .withId(id)
+            .withLastBettor(lastBettor)
+            .withOriginalEndDate(originalEndDate)
+            .withOwner(owner)
+            .endsAt(endDate)
+            .withBets(savedBets)
+            .build()
+        );
     }
 
     save(auction) {
-        return this.sequelize.sync()
-            .then(() =>
-                this.auctionSchema.create({
-                    owner_id: auction.owner.id
-                })
-            );
-    }
+        const savedAuction = this.schema.create({
+            ownerId: auction.owner.id,
+            endDate: auction.endDate,
+            originalEndDate: auction.originalEndDate,
+        });
+        const savedBets = this.betsRepository.saveAll(auction.bets);
 
-    getAll() {
-        return this.sequelize.sync()
-            .then(() =>
-                this.auctionSchema.findAll()
-            );
-    }
-
-    get(id) {
-        return this.sequelize.sync()
-            .then(() =>
-                this.auctionSchema.findById(id)
-            );
+        return Promise.all([
+            savedAuction,
+            savedBets,
+        ]).then((([
+            savedAuction,
+            savedBets
+        ]) => this.toModel(savedAuction, savedBets)));
     }
 
     getRecent() {
-        return this.sequelize.sync()
-            .then(() =>
-                this.auctionSchema.findAll({
-                    where: {
-                        createdAt: {
-                            [this.op.gt]: this.yesterday,
-                        },
-                    },
-                })
-            );
+        return this.schema.findAll({
+            where: {
+                createdAt: {
+                    [this.op.gt]: this.yesterday,
+                },
+            },
+        }).then(auctions => auctions.map(auction => this.toModel(auction)));
     }
 
     get yesterday() {
-        return new Date(Date.now() - (24 * 60 * 60 * 1000));
+        return this._yesterday || new Date(Date.now() - (24 * 60 * 60 * 1000));
     }
 
-    delete(id) {
-        return this.sequelize.sync()
-            .then(() =>
-                this.auctionSchema.destroy({
-                    where: {
-                        id: {
-                            [this.op.eq]: id
-                        }
-                    }
-                })
-            );
+    set yesterday(date) {
+        this._yesterday = date;
     }
 }

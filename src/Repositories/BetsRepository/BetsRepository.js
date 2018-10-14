@@ -1,17 +1,18 @@
 import {
     BetBuilder
 } from '../../Model/Builders';
+import {
+    SequelizeRepository
+} from '../SequelizeRepository';
 
-export class BetsRepository {
+export class BetsRepository extends SequelizeRepository {
 
     constructor({
-        Sequelize,
-        betSchema,
         usersRepository,
         auctionsRepository,
+        ...otherProps
     }) {
-        this.op = Sequelize.Op;
-        this.betSchema = betSchema;
+        super(otherProps);
         this.usersRepository = usersRepository;
         this.auctionsRepository = auctionsRepository;
     }
@@ -40,19 +41,15 @@ export class BetsRepository {
         auction,
         bettor,
     }) {
-        return this.betSchema.create({
+        return this.schema.create({
             amount,
             auctionId: auction.id,
             bettorId: bettor.id,
         }).then((savedBet) => this.toModel(savedBet));
     }
 
-    saveAll(bets) {
-        return Promise.all(bets.map(bet => this.save(bet)));
-    }
-
     getByAuctionId(auctionId) {
-        return this.betSchema.findAll({
+        return this.schema.findAll({
             where: {
                 auctionId: {
                     [this.op.eq]: auctionId,
