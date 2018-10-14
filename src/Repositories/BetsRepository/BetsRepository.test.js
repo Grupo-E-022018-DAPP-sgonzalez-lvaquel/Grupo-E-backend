@@ -77,7 +77,7 @@ describe('BetsRepository', () => {
         bets = [bet1, bet2];
     });
 
-    it('returns an equal object', () => {
+    xit('returns an equal object', () => {
         return sequelize.sync().then(() => {
             betsRepository.save(bet1).then(savedBet => {
                 Object.keys(bet1).forEach(key => {
@@ -87,7 +87,7 @@ describe('BetsRepository', () => {
         });
     });
 
-    it('saveAll', () => {
+    xit('saveAll', () => {
         return betsRepository.saveAll(bets).then((savedBets) =>
             savedBets.forEach((savedBet, index) =>
                 Object.keys(bets[index]).forEach(key =>
