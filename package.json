@@ -32,6 +32,9 @@
   },
   "homepage": "https://github.com/Grupo-E-022018-DAPP-sgonzalez-lvaquel/Grupo-E-frontend#readme",
   "jest": {
+    "modulePathIgnorePatterns": [
+      "<rootDir>/config"
+    ],
     "transform": {
       "^.+\\.jsx?$": "babel-jest"
     }
@@ -40,6 +43,7 @@
     "babel-cli": "^6.26.0",
     "babel-jest": "^23.4.2",
     "babel-preset-env": "^1.7.0",
+    "babel-preset-latest": "^6.24.1",
     "babel-preset-react": "^6.24.1",
     "codacy-coverage": "^3.0.0",
     "eslint": "^5.5.0",
