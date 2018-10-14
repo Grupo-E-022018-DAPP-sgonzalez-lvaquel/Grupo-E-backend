@@ -25,4 +25,9 @@ export class UserBuilder {
         this.user = {equals: () => false};
         return this;
     }
+
+    withId(id) {
+        this.user.id = id;
+        return this;
+    }
 }
