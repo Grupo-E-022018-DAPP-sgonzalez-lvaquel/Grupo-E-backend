@@ -7,14 +7,10 @@ import {
 
 export class BetsRepository extends SequelizeRepository {
 
-    constructor({
-        usersRepository,
-        auctionsRepository,
-        ...otherProps
-    }) {
-        super(otherProps);
-        this.usersRepository = usersRepository;
-        this.auctionsRepository = auctionsRepository;
+    constructor(props) {
+        super(props);
+        this.usersRepository = props.usersRepository;
+        this.auctionsRepository = props.auctionsRepository;
     }
 
     toModel({
