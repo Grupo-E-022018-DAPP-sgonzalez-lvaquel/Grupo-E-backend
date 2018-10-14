@@ -5,4 +5,8 @@ export class Bet {
         this.auction = auction;        
         this.bettor = bettor;            
     }
+
+    validate(auction) {
+        return auction.canUserBet(this.bettor);
+    }
 }

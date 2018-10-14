@@ -2,14 +2,27 @@ import {
     AuctionStateBuilder,
     UserBuilder
 } from '../Builders';
+import {
+    UserCanNotBetError
+} from '../Exceptions';
 
 
 export class Auction {
 
-    constructor(owner, lastBettor, state) {
-        this.owner = owner || new UserBuilder().null().build();
-        this.lastBettor = lastBettor || new UserBuilder().null().build();
-        this.state = state || new AuctionStateBuilder().new().build();
+    constructor(
+        owner = new UserBuilder().null().build(),
+        lastBettor = new UserBuilder().null().build(),
+        state = new AuctionStateBuilder().new().build(),
+        endDate = new Date(Date.now() + 600000),
+        clock = Date
+    ) {
+        this.owner = owner;
+        this.lastBettor = lastBettor;
+        this.state = state;
+        this.originalEndDate = endDate;
+        this.endDate = endDate;
+        this.clock = clock;
+        this.bets = [];
     }
 
     start() {
@@ -39,9 +52,13 @@ export class Auction {
         return this.owner.equals(user);
     }
 
-    addBet() {
+    addBet(bet) {
+        if (!bet.validate(this)) {
+            throw new UserCanNotBetError(bet);
+        }
+        bet.auction = this;
         this.calculateEndDate();
-        // Register bet
+        this.bets.push(bet);
     }
 
     calculateEndDate() {

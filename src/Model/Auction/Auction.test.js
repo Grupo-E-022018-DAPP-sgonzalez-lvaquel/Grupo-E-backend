@@ -1,21 +1,22 @@
 import {
     AuctionBuilder,
-    UserBuilder
+    UserBuilder,
+    BetBuilder
 } from '../Builders';
 
 
 describe('Auction', () => {
-    describe('who can bet', () => {
-        let anyUser;
-        let anyOtherUser;
-        let anonymousUser;
-      
-        beforeEach(() => {
-            anyUser = new UserBuilder().build();
-            anyOtherUser = new UserBuilder().build();
-            anonymousUser = new UserBuilder().anonymous().build();
-        });
+    let anyUser;
+    let anyOtherUser;
+    let anonymousUser;
 
+    beforeEach(() => {
+        anyUser = new UserBuilder().build();
+        anyOtherUser = new UserBuilder().build();
+        anonymousUser = new UserBuilder().anonymous().build();
+    });
+
+    describe('who can bet', () => {
         describe('in a new auction', () => {
             test('the owner can not bet', () => {
                 // Setup
@@ -51,44 +52,44 @@ describe('Auction', () => {
         });
         describe('in an in progress auction', () => {
             test('the owner can not bet', () => {
-            // Setup
+                // Setup
                 const auction = new AuctionBuilder()
                     .inProgress()
                     .withOwner(anyUser)
                     .build();
-    
+
                 // Exercise
                 const actual = auction.canUserBet(anyUser);
-    
+
                 // Verify
                 expect(actual).toBeFalsy();
             });
             test('last bettor can not bet', () => {
-            // Setup
+                // Setup
                 const auction = new AuctionBuilder()
                     .inProgress()
                     .withLastBettor(anyUser)
                     .build();
-    
+
                 // Exercise
                 expect(auction.canUserBet(anyUser)).toBeFalsy();
             });
             test('registered user can bet if he is not the last bettor', () => {
-            // Setup
+                // Setup
                 const auction = new AuctionBuilder()
                     .inProgress()
                     .withLastBettor(anyOtherUser)
                     .build();
-    
+
                 // Exercise
                 expect(auction.canUserBet(anyUser)).toBeTruthy();
             });
             test('anonymous user can not bet', () => {
-            // Setup
+                // Setup
                 const auction = new AuctionBuilder()
                     .inProgress()
                     .build();
-    
+
                 // Exercise
                 expect(auction.canUserBet(anonymousUser)).toBeFalsy();
             });
@@ -109,7 +110,7 @@ describe('Auction', () => {
                 const auction = new AuctionBuilder()
                     .ended()
                     .build();
-              
+
                 // Exercise
                 expect(auction.canUserBet(anyUser)).toBeFalsy();
             });
@@ -118,23 +119,39 @@ describe('Auction', () => {
                 const auction = new AuctionBuilder()
                     .ended()
                     .build();
-                
+
                 // Exercise
                 expect(auction.canUserBet(anonymousUser)).toBeFalsy();
             });
         });
     });
     describe('when it ends', () => {
-        const betDTO = {};
+        let bet; 
+        
+        beforeEach(() => {
+            bet = new BetBuilder()
+                .withAmount(10)
+                .withBettor(anyOtherUser)
+                .build();
+        });
+        
         describe('when a user bets before the last 5 minutes', () => {
             test('the time of finalization does not extend', () => {
                 // Setup
                 const date = Date.parse('Jan 5, 1995 20:00');
-                const clockMock = {now: () => Date.parse('Jan 4, 1995 20:00')};
-                const auction = new AuctionBuilder().withClock(clockMock).withOriginalEndDate(date).endsAt(date).build();
+                const clockMock = {
+                    now: () => Date.parse('Jan 4, 1995 20:00')
+                };
+                const auction = new AuctionBuilder()
+                    .inProgress()
+                    .withOwner(anyUser)
+                    .withClock(clockMock)
+                    .withOriginalEndDate(date)
+                    .endsAt(date)
+                    .build();
 
                 // Exercise
-                auction.addBet(betDTO);
+                auction.addBet(bet);
 
                 // Verify
                 expect(auction.endDate).toEqual(date);
@@ -145,11 +162,19 @@ describe('Auction', () => {
                 // Setup
                 const date = Date.parse('Jan 4, 1995 20:00');
                 const extendedDate = Date.parse('Jan 4, 1995 20:05');
-                const clockMock = {now: () => Date.parse('Jan 4, 1995 19:59')};
-                const auction = new AuctionBuilder().withClock(clockMock).withOriginalEndDate(date).endsAt(date).build();
+                const clockMock = {
+                    now: () => Date.parse('Jan 4, 1995 19:59')
+                };
+                const auction = new AuctionBuilder()
+                    .inProgress()
+                    .withOwner(anyUser)
+                    .withClock(clockMock)
+                    .withOriginalEndDate(date)
+                    .endsAt(date)
+                    .build();
 
                 // Exercise
-                auction.addBet(betDTO);
+                auction.addBet(bet);
 
                 // Verify
                 expect(auction.endDate).toEqual(extendedDate);
@@ -160,11 +185,19 @@ describe('Auction', () => {
                 // Setup
                 const originalDate = Date.parse('Jan 2, 1995 19:00');
                 const date = Date.parse('Jan 4, 1995 20:00');
-                const clockMock = {now: () => Date.parse('Jan 4, 1995 19:59')};
-                const auction = new AuctionBuilder().withClock(clockMock).withOriginalEndDate(originalDate).endsAt(date).build();
+                const clockMock = {
+                    now: () => Date.parse('Jan 4, 1995 19:59')
+                };
+                const auction = new AuctionBuilder()
+                    .inProgress()
+                    .withOwner(anyUser)
+                    .withClock(clockMock)
+                    .withOriginalEndDate(originalDate)
+                    .endsAt(date)
+                    .build();
 
                 // Exercise
-                auction.addBet(betDTO);
+                auction.addBet(bet);
 
                 // Verify
                 expect(auction.endDate).toEqual(date);
