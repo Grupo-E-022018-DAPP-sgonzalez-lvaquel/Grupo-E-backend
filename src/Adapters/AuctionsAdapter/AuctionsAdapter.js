@@ -1,4 +1,6 @@
-import { AuctionsParser } from './AuctionsParser';
+import {
+    AuctionsParser
+} from './AuctionsParser';
 
 export class AuctionsAdapter {
 
@@ -6,7 +8,17 @@ export class AuctionsAdapter {
         return new AuctionsParser(auction);
     }
 
-    serialize(a){
-        return a;
+    serialize({
+        id,
+        bets,
+        owner,
+        endDate
+    }) {
+        return {
+            id,
+            bets: bets.map(bet => bet.id),
+            ownerId: owner.id,
+            endDate
+        };
     }
 }
