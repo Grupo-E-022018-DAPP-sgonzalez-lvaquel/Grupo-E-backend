@@ -49,4 +49,9 @@ export class AuctionBuilder {
         this.auction.id = id;
         return this;
     }
+
+    withBets(bets) {
+        this.auction.bets = bets;
+        return this;
+    }
 }
