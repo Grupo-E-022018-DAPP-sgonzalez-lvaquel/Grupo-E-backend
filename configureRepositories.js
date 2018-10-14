@@ -38,8 +38,6 @@ export function configureRepositories({
 
     auctionsRepository.betsRepository = betsRepository;    
 
-    sequelize.sync();
-
     return {
         betsRepository,
         usersRepository,

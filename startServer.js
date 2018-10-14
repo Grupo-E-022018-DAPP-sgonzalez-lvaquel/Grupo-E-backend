@@ -79,24 +79,28 @@ const {
     usersRepository,
 });
 
-const app = express();
-
-app.use(SubastifyWebService({
-    express,
-    bodyParser,
-    AuctionsWebService,
-    AuctionsCreateHandler,
-    AuctionsRetrieveHandler,
-    AuctionsRetrieveByIdHandler,
-    AuctionsRetrieveRecentHandler,
-    AuctionsUpdateByIdHandler,
-    AuctionsDeleteByIdHandler,
-    AuctionsCreateBetsHandler,
-    AuctionsRetrieveBetsHandler,
-    auctionsAdapter,
-    betsAdapter,
-    auctionsService,
-    betsService,
-}));
-
-app.listen(3000);
+sequelize.sync().then(() => {
+    
+    
+    const app = express();
+    
+    app.use(SubastifyWebService({
+        express,
+        bodyParser,
+        AuctionsWebService,
+        AuctionsCreateHandler,
+        AuctionsRetrieveHandler,
+        AuctionsRetrieveByIdHandler,
+        AuctionsRetrieveRecentHandler,
+        AuctionsUpdateByIdHandler,
+        AuctionsDeleteByIdHandler,
+        AuctionsCreateBetsHandler,
+        AuctionsRetrieveBetsHandler,
+        auctionsAdapter,
+        betsAdapter,
+        auctionsService,
+        betsService,
+    }));
+    
+    app.listen(3000);
+});
