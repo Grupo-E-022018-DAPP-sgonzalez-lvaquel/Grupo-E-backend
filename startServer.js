@@ -3,7 +3,7 @@ import bodyParser from 'body-parser';
 
 import {
     SubastifyWebService,
-    AuctionsWebService, 
+    AuctionsWebService,
     AuctionsCreateHandler,
     AuctionsRetrieveHandler,
     AuctionsRetrieveByIdHandler,
@@ -26,33 +26,57 @@ import {
     BetBuilder,
 } from './src/Model/Builders';
 import {
-    AuctionsRepository,
-    BetsRepository,
-} from './src/Repositories';
-import {
     Sequelize,
 } from 'sequelize';
-import { 
-    configureDBConnection, 
+import {
+    configureDBConnection,
 } from './configureDBConnection';
-import { 
+import {
+    configureRepositories
+} from './configureRepositories';
+import {
+    AuctionsRepository,
+    BetsRepository,
+    UsersRepository,
+} from './src/Repositories';
+import {
     AuctionSchema,
     BetSchema,
     UserSchema,
 } from './src/Schemas';
+import { configureServices } from './configureServices';
 
 const sequelize = configureDBConnection(Sequelize);
-const userSchema = UserSchema({
+
+const {
+    betsRepository,
+    usersRepository,
+    auctionsRepository,
+} = configureRepositories({
+    AuctionsRepository,
+    AuctionSchema,
+    BetsRepository,
+    BetSchema,
+    UsersRepository,
+    UserSchema,
     Sequelize,
     sequelize,
 });
-const auctionSchema = AuctionSchema({
-    Sequelize,
-    sequelize,
-});
-const betSchema = BetSchema({
-    Sequelize,
-    sequelize,
+
+const auctionsAdapter = new AuctionsAdapter();
+const betsAdapter = new BetsAdapter();
+
+const {
+    auctionsService,
+    betsService
+} = configureServices({
+    AuctionsService,
+    AuctionBuilder,
+    auctionsRepository,
+    BetsService,
+    BetBuilder,
+    betsRepository,
+    usersRepository,
 });
 
 const app = express();
@@ -69,24 +93,10 @@ app.use(SubastifyWebService({
     AuctionsDeleteByIdHandler,
     AuctionsCreateBetsHandler,
     AuctionsRetrieveBetsHandler,
-    AuctionsService: new AuctionsService({
-        AuctionBuilder,
-        auctionsRepository: new AuctionsRepository({
-            Sequelize,
-            sequelize,
-            auctionSchema,
-        }),
-    }),
-    auctionsAdapter: new AuctionsAdapter(),
-    BetsService: new BetsService({
-        BetBuilder,
-        betsRepository: new BetsRepository({
-            Sequelize,
-            sequelize,
-            betSchema,
-        }),
-    }),
-    BetsAdapter: new BetsAdapter(),
+    auctionsAdapter,
+    betsAdapter,
+    auctionsService,
+    betsService,
 }));
 
 app.listen(3000);
