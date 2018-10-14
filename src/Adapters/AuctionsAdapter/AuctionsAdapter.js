@@ -12,13 +12,15 @@ export class AuctionsAdapter {
         id,
         bets,
         owner,
-        endDate
+        endDate,
+        state,
     }) {
         return {
             id,
             bets: bets.map(bet => bet.id),
             ownerId: owner.id,
-            endDate
+            endDate,
+            state: state.name,
         };
     }
 }
