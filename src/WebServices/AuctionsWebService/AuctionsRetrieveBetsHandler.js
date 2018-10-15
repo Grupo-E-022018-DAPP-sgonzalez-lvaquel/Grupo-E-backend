@@ -5,9 +5,10 @@ export function AuctionsRetrieveBetsHandler({
     return (req, res, next) => {
         betsService.getByAuctionId(req.params.id).then(bets => {
             res.json(
-                betsAdapter.serialize(
-                    bets
-                )
+                bets.map(bet =>
+                    betsAdapter.serialize(
+                        bet
+                    ))
             );
         }).catch(next);
     };

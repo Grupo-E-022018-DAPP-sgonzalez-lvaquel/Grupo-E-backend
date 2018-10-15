@@ -4,8 +4,10 @@ export function AuctionsRetrieveHandler({
 }) {
     return (req, res, next) =>
         auctionsService.getAll().then(auctions =>
-            res.json(auctionsAdapter.serialize(auctions))
-                .status(200).end()
+            res.json(
+                auctions.map(auction =>
+                    auctionsAdapter.serialize(auction)
+                ))
         ).catch(next);
 }
 
