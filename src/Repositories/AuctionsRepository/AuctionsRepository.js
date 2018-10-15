@@ -40,22 +40,32 @@ export class AuctionsRepository extends SequelizeRepository {
     }
 
     save(auction) {
-        const savedAuction = this.schema.upsert({
-            id: auction.id,
-            ownerId: auction.owner.id,
-            endDate: auction.endDate,
-            originalEndDate: auction.originalEndDate,
-            state: auction.state.name,
-        });
+        let savedAuction;
+        if (auction.id) {
+            savedAuction = this.schema.create({
+                id: auction.id,
+                ownerId: auction.owner.id,
+                endDate: auction.endDate,
+                originalEndDate: auction.originalEndDate,
+                state: auction.state.name,
+            });
+        } else {
+            savedAuction = this.schema.create({
+                ownerId: auction.owner.id,
+                endDate: auction.endDate,
+                originalEndDate: auction.originalEndDate,
+                state: auction.state.name,
+            });
+        }
         const savedBets = this.betsRepository.saveAll(auction.bets);
 
         return Promise.all([
             savedAuction,
             savedBets,
-        ]).then((([
-            savedAuction,
-            savedBets
-        ]) => this.toModel(savedAuction, savedBets)));
+        ]).then(values => {
+            const [savedAuction, savedBets] = values;
+            return this.toModel(savedAuction, savedBets);
+        });
     }
 
     getRecent() {
