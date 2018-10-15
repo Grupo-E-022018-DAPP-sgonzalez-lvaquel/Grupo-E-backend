@@ -4,7 +4,7 @@ export class User {
     }
 
     equals(user) {
-        return this == user;
+        return user.constructor && this.constructor.name == user.constructor.name && this.id == user.id;
     }
 
     newAuction(){
