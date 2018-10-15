@@ -81,3 +81,7 @@ typings/
 
 # DB files
 db
+
+# editors
+.vscode
+.idea
