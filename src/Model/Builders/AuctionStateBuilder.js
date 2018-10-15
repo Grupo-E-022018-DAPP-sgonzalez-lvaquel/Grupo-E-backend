@@ -30,10 +30,13 @@ export class AuctionStateBuilder {
     }
 
     like(state) {
-        const stateStr = state.name;
-        AuctionStateNew.like(stateStr, this);
-        AuctionStateInProgress.like(stateStr, this);
-        AuctionStateEnded.like(stateStr, this);
+        if(typeof state == 'string') {
+            AuctionStateNew.like(state, this);
+            AuctionStateInProgress.like(state, this);
+            AuctionStateEnded.like(state, this);
+        } else {
+            this.state = state;
+        }
         return this;
     }
 }
