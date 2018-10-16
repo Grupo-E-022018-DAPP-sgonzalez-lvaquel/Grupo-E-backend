@@ -11,8 +11,8 @@ describe('Auction', () => {
     let anonymousUser;
 
     beforeEach(() => {
-        anyUser = new UserBuilder().build();
-        anyOtherUser = new UserBuilder().build();
+        anyUser = new UserBuilder().withId(1).build();
+        anyOtherUser = new UserBuilder().withId(2).build();
         anonymousUser = new UserBuilder().anonymous().build();
     });
 

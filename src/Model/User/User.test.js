@@ -5,7 +5,7 @@ describe('User', () => {
         let owner;
 
         beforeEach(() => {
-            owner = new UserBuilder().build();
+            owner = new UserBuilder().withId(1).build();
         });
 
         test('a user can create an auction', () => {
@@ -19,7 +19,7 @@ describe('User', () => {
 
             beforeEach(() => {
                 auction = owner.newAuction();
-                anyOtherUser = new UserBuilder().build();
+                anyOtherUser = new UserBuilder().withId(2).build();
             });
 
             test('a user can not bet in his own auction', () => {
