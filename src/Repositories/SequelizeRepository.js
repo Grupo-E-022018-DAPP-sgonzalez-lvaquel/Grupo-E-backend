@@ -21,7 +21,7 @@ export class SequelizeRepository {
     }
 
 
-    getAll(shallow) {
+    getAll({shallow} = {}) {
         return this.schema.findAll()
             .then(savedModels =>
                 savedModels.map(savedModel =>
@@ -33,7 +33,7 @@ export class SequelizeRepository {
 
     get(id, {
         shallow
-    }) {
+    } = {}) {
         return this.schema.findById(id).then(savedModel => this.toModel(savedModel, {
             shallow
         }));
