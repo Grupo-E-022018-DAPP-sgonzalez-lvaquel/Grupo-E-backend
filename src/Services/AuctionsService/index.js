@@ -1,0 +1,1 @@
+export { AuctionsService } from './AuctionsService';

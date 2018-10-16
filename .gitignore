@@ -78,3 +78,10 @@ typings/
 
 
 # End of https://www.gitignore.io/api/node
+
+# DB files
+db
+
+# editors
+.vscode
+.idea

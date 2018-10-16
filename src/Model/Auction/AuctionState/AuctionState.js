@@ -1,16 +1,22 @@
-import { AuctionStateBuilder } from '../../Builders';
+import {
+    AuctionStateBuilder
+} from '../../Builders';
 
 
 export class AuctionState {
-    isInProgress(){
+    get name() {
+        return this.constructor.name;
+    }
+
+    isInProgress() {
         return false;
     }
-    
-    start(){
+
+    start() {
         return new AuctionStateBuilder().inProgress().build();
     }
 
-    end(){
+    end() {
         return new AuctionStateBuilder().ended().build();
     }
 }

@@ -7,19 +7,13 @@
 
 ## Desarrollo
 
-- Instalar dependencias
-  
+- Iniciar entorno de desarrollo
   ``` bash
-  npm install
-  ```
-
-- Iniciar servidor
-  
-  ``` bash
-  npm start
+  docker-compose up
   ```
 
 - Ejecutar tests
+  
   ``` bash
   npm test
   ```  

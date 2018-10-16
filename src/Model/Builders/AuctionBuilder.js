@@ -1,4 +1,5 @@
 import { Auction } from '../Auction';
+import { AuctionStateBuilder } from './AuctionStateBuilder';
 
 export class AuctionBuilder {
 
@@ -42,6 +43,21 @@ export class AuctionBuilder {
 
     endsAt(date) {
         this.auction.endDate = date;
+        return this;
+    }
+
+    withId(id) {
+        this.auction.id = id;
+        return this;
+    }
+
+    withBets(bets) {
+        this.auction.bets = bets;
+        return this;
+    }
+
+    withState(state) {
+        this.auction.state = new AuctionStateBuilder().like(state).build();
         return this;
     }
 }

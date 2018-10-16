@@ -17,12 +17,18 @@ export class UserBuilder {
     }
 
     anonymous() {
+        this.withId(null);
         this.user.role = new UserRoleStrategyBuilder(this.user).anonymous().build();
         return this;
     }
 
     null() {
-        this.user = {equals: () => false};
+        this.anonymous();
+        return this;
+    }
+
+    withId(id) {
+        this.user.id = id;
         return this;
     }
 }

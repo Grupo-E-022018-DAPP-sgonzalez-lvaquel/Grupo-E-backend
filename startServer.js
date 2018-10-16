@@ -1,28 +1,8 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 
-import SubastifyWebService from './src/SubastifyWebService';
-import AuctionsWebService, {
-    AuctionsCreateHandler,
-    AuctionsRetrieveHandler,
-    AuctionsRetrieveByIdHandler,
-    AuctionsRetrieveRecentHandler,
-    AuctionsUpdateByIdHandler,
-    AuctionsDeleteByIdHandler,
-    AuctionsCreateBetsHandler,
-    AuctionsRetrieveBetsHandler,
-} from './src/AuctionsWebService';
-import AuctionsService from './src/AuctionsService';
-import BetsService from './src/BetsService';
-import AuctionsAdapter from './src/AuctionsAdapter';
-import BetsAdapter from './src/BetsAdapter';
-
-
-const app = express();
-
-app.use(SubastifyWebService({
-    express,
-    bodyParser,
+import {
+    SubastifyWebService,
     AuctionsWebService,
     AuctionsCreateHandler,
     AuctionsRetrieveHandler,
@@ -32,10 +12,95 @@ app.use(SubastifyWebService({
     AuctionsDeleteByIdHandler,
     AuctionsCreateBetsHandler,
     AuctionsRetrieveBetsHandler,
-    AuctionsService: new AuctionsService(),
-    AuctionsAdapter: new AuctionsAdapter(),
-    BetsService: new BetsService(),
-    BetsAdapter: new BetsAdapter(),
-}));
+} from './src/WebServices';
+import {
+    AuctionsService,
+    BetsService
+} from './src/Services';
+import {
+    AuctionsAdapter,
+    BetsAdapter
+} from './src/Adapters';
+import {
+    AuctionBuilder,
+    BetBuilder,
+} from './src/Model/Builders';
+import {
+    Sequelize,
+} from 'sequelize';
+import {
+    configureDBConnection,
+} from './configureDBConnection';
+import {
+    configureRepositories
+} from './configureRepositories';
+import {
+    AuctionsRepository,
+    BetsRepository,
+    UsersRepository,
+} from './src/Repositories';
+import {
+    AuctionSchema,
+    BetSchema,
+    UserSchema,
+} from './src/Schemas';
+import { configureServices } from './configureServices';
 
-app.listen(3000);
+const sequelize = configureDBConnection(Sequelize);
+
+const {
+    betsRepository,
+    usersRepository,
+    auctionsRepository,
+} = configureRepositories({
+    AuctionsRepository,
+    AuctionSchema,
+    BetsRepository,
+    BetSchema,
+    UsersRepository,
+    UserSchema,
+    Sequelize,
+    sequelize,
+});
+
+const auctionsAdapter = new AuctionsAdapter();
+const betsAdapter = new BetsAdapter();
+
+const {
+    auctionsService,
+    betsService
+} = configureServices({
+    AuctionsService,
+    AuctionBuilder,
+    auctionsRepository,
+    BetsService,
+    BetBuilder,
+    betsRepository,
+    usersRepository,
+});
+
+sequelize.sync().then(() => {
+    
+    
+    const app = express();
+    
+    app.use(SubastifyWebService({
+        express,
+        bodyParser,
+        AuctionsWebService,
+        AuctionsCreateHandler,
+        AuctionsRetrieveHandler,
+        AuctionsRetrieveByIdHandler,
+        AuctionsRetrieveRecentHandler,
+        AuctionsUpdateByIdHandler,
+        AuctionsDeleteByIdHandler,
+        AuctionsCreateBetsHandler,
+        AuctionsRetrieveBetsHandler,
+        auctionsAdapter,
+        betsAdapter,
+        auctionsService,
+        betsService,
+    }));
+    
+    app.listen(3000);
+});

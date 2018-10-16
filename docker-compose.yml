@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: root
+      POSTGRES_PASSWORD: root
+      POSTGRES_DB: subastify
+      PGDATA: /db/subastify
+    ports:
+     - "5432:5432"
+  api:  
+    environment:
+      NODE_ENV: docker
+    depends_on:
+      - db
+    build: .
+    volumes:
+      - ${PWD}:/usr/src/app
+    ports:
+     - "3000:3000"
+  db_browser:
+    depends_on:
+      - db
+    image: dpage/pgadmin4
+    ports:
+      - "80:80"
+    environment:
+      PGADMIN_DEFAULT_EMAIL: user@domain.com
+      PGADMIN_DEFAULT_PASSWORD: SuperSecret
