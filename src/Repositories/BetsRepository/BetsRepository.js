@@ -17,9 +17,9 @@ export class BetsRepository extends SequelizeRepository {
         amount,
         bettorId,
         auctionId
-    }) {
-        const bettor = this.usersRepository.get(bettorId);
-        const auction = this.auctionsRepository.get(auctionId);
+    }, {shallow} = {}) {
+        const bettor = this.usersRepository.get(bettorId, {shallow: true});
+        const auction = shallow || this.auctionsRepository.get(auctionId, {shallow: true});
 
         return Promise.all([
             bettor,

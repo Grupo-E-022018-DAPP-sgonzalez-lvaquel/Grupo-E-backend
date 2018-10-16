@@ -20,20 +20,33 @@ export class AuctionsRepository extends SequelizeRepository {
         originalEndDate,
         endDate,
         state,
-    }, savedBets) {
-        const owner = this.usersRepository.get(ownerId);
-        const lastBettor = this.usersRepository.get(lastBettorId);
+    }, {
+        savedBets,
+        shallow,
+    } = {}) {
+        const owner = this.usersRepository.get(ownerId, {
+            shallow: true
+        });
+        const lastBettor = this.usersRepository.get(lastBettorId, {
+            shallow: true
+        });
+        const bets = savedBets || shallow || this.betsRepository.getByAuctionId(id);
 
         return Promise.all([
             owner,
             lastBettor,
-        ]).then(([owner, lastBettor]) => new AuctionBuilder()
+            bets,
+        ]).then(([
+            owner,
+            lastBettor,
+            bets,
+        ]) => new AuctionBuilder()
             .withId(id)
             .withLastBettor(lastBettor)
             .withOriginalEndDate(originalEndDate)
             .withOwner(owner)
             .endsAt(endDate)
-            .withBets(savedBets)
+            .withBets(bets)
             .withState(state)
             .build()
         );
@@ -64,7 +77,9 @@ export class AuctionsRepository extends SequelizeRepository {
             savedBets,
         ]).then(values => {
             const [savedAuction, savedBets] = values;
-            return this.toModel(savedAuction, savedBets);
+            return this.toModel(savedAuction, {
+                savedBets
+            });
         });
     }
 

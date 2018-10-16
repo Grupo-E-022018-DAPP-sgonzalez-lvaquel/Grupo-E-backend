@@ -21,12 +21,22 @@ export class SequelizeRepository {
     }
 
 
-    getAll() {
-        return this.schema.findAll().then(savedModels => savedModels.map(savedModel => this.toModel(savedModel)));
+    getAll(shallow) {
+        return this.schema.findAll()
+            .then(savedModels =>
+                savedModels.map(savedModel =>
+                    this.toModel(savedModel, {
+                        shallow
+                    })))
+            .then(models => Promise.all(models));
     }
 
-    get(id) {
-        return this.schema.findById(id).then(savedModel => this.toModel(savedModel));
+    get(id, {
+        shallow
+    }) {
+        return this.schema.findById(id).then(savedModel => this.toModel(savedModel, {
+            shallow
+        }));
     }
 
     delete(id) {
