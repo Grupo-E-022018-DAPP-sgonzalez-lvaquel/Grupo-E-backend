@@ -1,4 +1,4 @@
-version: '3'
+version: '2'
 
 services:
   db:
@@ -11,16 +11,14 @@ services:
       PGDATA: /db/subastify
     ports:
      - "5432:5432"
-  api:  
+  api:
     environment:
       NODE_ENV: docker
     depends_on:
       - db
     build: .
-    volumes:
-      - ${PWD}:/usr/src/app
     ports:
-     - "3000:3000"
+     - "3001:3000"
   db_browser:
     depends_on:
       - db
