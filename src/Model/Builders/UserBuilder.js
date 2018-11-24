@@ -31,4 +31,9 @@ export class UserBuilder {
         this.user.id = id;
         return this;
     }
+
+    withKid(kid) {
+        this.user.kid = kid;
+        return this;
+    }
 }

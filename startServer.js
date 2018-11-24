@@ -13,18 +13,23 @@ import {
     AuctionsDeleteByIdHandler,
     AuctionsCreateBetsHandler,
     AuctionsRetrieveBetsHandler,
+    UsersWebService,
+    UsersFindOrCreateHandler,
 } from './src/WebServices';
 import {
     AuctionsService,
-    BetsService
+    BetsService,
+    UsersService
 } from './src/Services';
 import {
     AuctionsAdapter,
-    BetsAdapter
+    BetsAdapter,
+    UsersAdapter
 } from './src/Adapters';
 import {
     AuctionBuilder,
     BetBuilder,
+    UserBuilder
 } from './src/Model/Builders';
 import {
     Sequelize,
@@ -66,10 +71,12 @@ const {
 
 const auctionsAdapter = new AuctionsAdapter();
 const betsAdapter = new BetsAdapter();
+const usersAdapter = new UsersAdapter();
 
 const {
     auctionsService,
-    betsService
+    betsService,
+    usersService
 } = configureServices({
     AuctionsService,
     AuctionBuilder,
@@ -78,6 +85,9 @@ const {
     BetBuilder,
     betsRepository,
     usersRepository,
+    UserBuilder,
+    UsersService,
+    usersAdapter,
 });
 
 sequelize.sync().then(() => {
@@ -102,6 +112,10 @@ sequelize.sync().then(() => {
         betsAdapter,
         auctionsService,
         betsService,
+        UsersWebService,
+        usersAdapter,
+        usersService,
+        UsersFindOrCreateHandler,
     }));
     
     app.listen(3001);

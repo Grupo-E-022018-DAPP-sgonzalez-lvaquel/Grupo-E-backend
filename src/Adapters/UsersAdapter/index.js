@@ -1,0 +1,1 @@
+export { UsersAdapter } from './UsersAdapter';

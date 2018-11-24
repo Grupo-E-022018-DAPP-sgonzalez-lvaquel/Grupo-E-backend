@@ -6,6 +6,8 @@ export function configureServices({
     BetBuilder,
     betsRepository,
     usersRepository,
+    UserBuilder,
+    UsersService,
 }) {
     const auctionsService = new AuctionsService({
         AuctionBuilder,
@@ -18,8 +20,14 @@ export function configureServices({
         usersRepository,
     });
 
+    const usersService = new UsersService({
+        UserBuilder,
+        usersRepository,
+    });
+
     return {
         auctionsService,
-        betsService
+        betsService,
+        usersService,
     };
 }
