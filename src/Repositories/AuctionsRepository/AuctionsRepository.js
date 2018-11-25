@@ -14,6 +14,9 @@ export class AuctionsRepository extends SequelizeRepository {
     }
 
     toModel({
+        title,
+        description,
+        imageUrl,
         id,
         ownerId,
         lastBettorId,
@@ -41,6 +44,9 @@ export class AuctionsRepository extends SequelizeRepository {
             lastBettor,
             bets,
         ]) => new AuctionBuilder()
+            .withTitle(title)
+            .withDescription(description)
+            .withImageUrl(imageUrl)
             .withId(id)
             .withLastBettor(lastBettor)
             .withOriginalEndDate(originalEndDate)
@@ -56,6 +62,9 @@ export class AuctionsRepository extends SequelizeRepository {
         let savedAuction;
         if (auction.id) {
             savedAuction = this.schema.create({
+                title: auction.title,
+                description: auction.description,
+                imageUrl: auction.imageUrl,
                 id: auction.id,
                 ownerId: auction.owner.id,
                 endDate: auction.endDate,
@@ -64,6 +73,9 @@ export class AuctionsRepository extends SequelizeRepository {
             });
         } else {
             savedAuction = this.schema.create({
+                title: auction.title,
+                description: auction.description,
+                imageUrl: auction.imageUrl,
                 ownerId: auction.owner.id,
                 endDate: auction.endDate,
                 originalEndDate: auction.originalEndDate,
@@ -90,8 +102,7 @@ export class AuctionsRepository extends SequelizeRepository {
                     [this.op.gt]: this.yesterday,
                 },
             },
-        }).then(auctions => auctions.map(auction => this.toModel(auction))
-        ).then(models => Promise.all(models));
+        }).then(auctions => auctions.map(auction => this.toModel(auction))).then(models => Promise.all(models));
     }
 
     get yesterday() {

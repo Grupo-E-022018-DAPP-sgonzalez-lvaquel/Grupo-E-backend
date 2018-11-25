@@ -9,6 +9,9 @@ export class AuctionsAdapter {
     }
 
     serialize({
+        title,
+        description,
+        imageUrl,
         id,
         bets,
         owner,
@@ -16,6 +19,9 @@ export class AuctionsAdapter {
         state,
     }) {
         return {
+            title,
+            description,
+            imageUrl,
             id,
             bets: bets.map(bet => bet.id),
             ownerId: owner.id,

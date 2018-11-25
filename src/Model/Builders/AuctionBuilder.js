@@ -11,6 +11,21 @@ export class AuctionBuilder {
         return this.auction;
     }   
 
+    withTitle(title) { 
+        this.auction.title = title; 
+        return this;
+    }
+
+    withDescription(description) { 
+        this.auction.description = description; 
+        return this;
+    }
+
+    withImageUrl(imageUrl) { 
+        this.auction.imageUrl = imageUrl; 
+        return this;
+    }
+
     withOwner(owner) {
         this.auction.owner = owner;
         return this;

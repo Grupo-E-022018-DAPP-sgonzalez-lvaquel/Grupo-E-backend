@@ -9,9 +9,17 @@ export class AuctionsService {
     }
 
     create({
+        title,
+        description,
+        imageUrl,
+        endDate,
         owner
     }) {
         const auction = new this.AuctionBuilder()
+            .withTitle(title)
+            .withDescription(description)
+            .withImageUrl(imageUrl)
+            .withOriginalEndDate(new Date(Date.parse(endDate)))
             .withOwner(owner)
             .build();
         return this.auctionsRepository.save(auction);

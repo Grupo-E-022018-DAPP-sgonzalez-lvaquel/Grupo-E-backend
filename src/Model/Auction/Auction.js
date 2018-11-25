@@ -10,12 +10,18 @@ import {
 export class Auction {
 
     constructor(
+        title,
+        description,
+        imageUrl,
         owner = new UserBuilder().null().build(),
         lastBettor = new UserBuilder().null().build(),
         state = new AuctionStateBuilder().new().build(),
         endDate = new Date(Date.now() + 600000),
         clock = Date
     ) {
+        this.title = title;
+        this.description = description;
+        this.imageUrl = imageUrl;
         this.owner = owner;
         this.lastBettor = lastBettor;
         this.state = state;
