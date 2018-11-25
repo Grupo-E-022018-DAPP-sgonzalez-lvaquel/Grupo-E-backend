@@ -3,6 +3,17 @@ export function AuctionSchema({
     sequelize,
 }) {
     return sequelize.define('auction', {
+        title: {
+            allowNull: false,
+            type: Sequelize.STRING,
+        },
+        description: {
+            allowNull: false,
+            type: Sequelize.STRING,
+        },
+        imageUrl: {
+            type: Sequelize.STRING,
+        },
         ownerId: {
             allowNull: false,
             type: Sequelize.INTEGER,
