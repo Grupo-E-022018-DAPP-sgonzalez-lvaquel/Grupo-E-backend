@@ -90,7 +90,8 @@ export class AuctionsRepository extends SequelizeRepository {
                     [this.op.gt]: this.yesterday,
                 },
             },
-        }).then(auctions => auctions.map(auction => this.toModel(auction)));
+        }).then(auctions => auctions.map(auction => this.toModel(auction))
+        ).then(models => Promise.all(models));
     }
 
     get yesterday() {
